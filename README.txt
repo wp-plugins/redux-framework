@@ -1,4 +1,4 @@
-== Redux Framework ==
+=== Redux Framework ===
 Contributors: ghost1227, dovyp
 Tags: admin, admin interface, options, theme options, plugin options, options framework
 Donate link: http://reduxframework.com/
@@ -11,6 +11,7 @@ License URI: http://www.gnu.org/licenses/gpl-2.0.html
 Redux is a simple, truly extensible options framework for WordPress themes and plugins and a full demo configuration so you can dive right in!
 
 == Description ==
+
 Redux is a simple, truly extensible options framework for WordPress themes and plugins. Built on the WordPress Settings API, Redux supports a multitude of field types as well as custom error handling, custom field & validation types, and import/export functionality.
 
 But what does Redux actually DO? We don't believe that theme and plugin
@@ -30,16 +31,21 @@ provided by a third-party theme or plugin developer to actual do anything
 cool!
 
 == Installation ==
+
 1. Upload the "ReduxFramework" directory to "/wp-content/plugins/".
 2. Activate the plugin through the "Plugins" menu in WordPress.
 
 == Frequently Asked Questions ==
+
 = Why doesn't this plugin do anything? =
+
 Redux is an options framework... in other words, it's not designed to do anything on its own!
 
 = How can I learn more about Redux? =
+
 Visit our website at http://reduxframework.com
 
 == Changelog ==
+
 = 3.0.0 =
 * Initial plugin release.

@@ -8,7 +8,7 @@ Stable tag: 3.0.0
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-Redux is a simple, truly extensible and fully responsive options framework for WordPress themes and plugins. It comes with an integrated demo so you can dive right in!
+Redux is a simple, truly extensible and fully responsive options framework for WordPress themes and plugins. It ships with an integrated demo.
 
 == Description ==
 
@@ -129,11 +129,7 @@ That's because the real FAQ section is one our site! Please visit [http://reduxf
 
 == Screenshots ==
 
-1. This is the demo mode of Redux Framework. Activate it and you will find a fully-function admin panel that you can play with. On the Plugins page, beneith the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with. 
-
-= We have an Online Demo! =
-Don't take our word for it, check out our online demo and try Redux without installing a thing!
-[**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
+1. This is the demo mode of Redux Framework. Activate it and you will find a fully-function admin panel that you can play with. On the Plugins page, beneith the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
 

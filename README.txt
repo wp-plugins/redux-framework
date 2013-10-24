@@ -41,6 +41,51 @@ You can find [docs](http://reduxframework.com/docs/), [FAQs](http://reduxframewo
 = Redux Framework Needs Your Support =
 It is hard to continue development and support for this free plugin without contributions from users like you. If you enjoy using Redux Framework, and find it useful, please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U). Your donation will help encourage and support the plugin's continued development and better user support.
 
+=  Features =
+
+**Redux has a vast array of fields:**
+
+* Border
+* Button Set
+* Checkbox / Multi-Check
+* Color (Wordpress Native)
+* Gradient
+* Date
+* Dimensions (Height/Width)
+* Editor (Wordpress Native)
+* Gallery (Wordpress Native)
+* Group (Repeatable/Non-Repeatable)
+* Image Select (Patterns/Presets)
+* Info (Header)
+* Link Color
+* Media (Wordpress Native)
+* Multi-Text
+* Password
+* Radio (w/ Wordpress Data)
+* Select (Select/Multi-Select w/ Select2 & Wordpress Data)
+* Slider
+* Sortable (Drag/Drop Checkbox/Input Fields)
+* Sorter (Drag/Drop Manager - Works great for content blocks)
+* Spacing (Margin/Padding/Absolute)
+* Spinner
+* Switch
+* Text
+* Textarea
+* Typography 
+ * The most advanced typography module complete with preview, Google fonts, and auto-css output!
+
+** Add to that these amazing features:**
+
+* Field Validation
+* Language Packs
+* Full value escaping
+* Required - Link visibility from parent fields
+	* Set this to affect the visibility of the field on the parent's value.
+* Outout attribute - Automatically generate CSS and append Google Fonts stylesheet to your theme with you only setting the appropriate CSS selector.
+* Oh, and did we mention a fully integrated Google Webfonts setup that will make you cry?
+
+Redux Framework is the solution for theme and plugin developers alike.
+
 
 = Translators & Non-English Speakers =
 We need your help to translate Redux into your language. If you have created your own language pack, or have an update of an existing one, you can post [gettext PO and MO files](http://codex.wordpress.org/Translating_WordPress) to the [Github Repo](https://github.com/ReduxFramework/ReduxFramework) via a pull request or you can post an issue with the attached files. You can download the latest [POT file](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/redux.pot), and see the latest [PO files in each language](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/).

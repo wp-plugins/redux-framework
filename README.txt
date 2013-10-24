@@ -124,9 +124,16 @@ Redux is an options framework... in other words, it's not designed to do anythin
 
 Visit our website at [http://reduxframework.com/](http://reduxframework.com/)
 
+= You don't have much content in this FAQ section =
+That's because the real FAQ section is one our site! Please visit [http://reduxframework.com/docs/faqs/](http://reduxframework.com/docs/faqs/
+
 == Screenshots ==
 
-1. This is the demo mode of Redux Framework. Activate it and you will find a fully-function admin panel that you can play with. On the Plugins page, beneith the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.
+1. This is the demo mode of Redux Framework. Activate it and you will find a fully-function admin panel that you can play with. On the Plugins page, beneith the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with. 
+
+= We have an Online Demo! =
+Don't take our word for it, check out our online demo and try Redux without installing a thing!
+[**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
 
@@ -140,10 +147,9 @@ Redux is now hosted on Wordpress.org! Update in order to get proper, stable upda
 
 == Attribution ==
 
-Redux is was originally based off the following frameworks. 
+Redux is was originally based off the following frameworks:
+
 * [NHP](https://github.com/leemason/NHP-Theme-Options-Framework) 
-* [SMOF](https://github.com/syamilmj/Options-Framework "Slightly Modified Options Framework").
+* [SMOF](https://github.com/syamilmj/Options-Framework "Slightly Modified Options Framework")
 
-It has now branched and been improved in many ways. If you like what you see, realize this is a labor of love. Consider donating!
-
-[![Donate to the framework](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif "Donate to the framework")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U)
+It has now branched and been improved in many ways. If you like what you see, realize this is a labor of love. Please [donate to the Redux Framework](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U) if you are able.

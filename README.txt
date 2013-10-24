@@ -22,13 +22,6 @@ simple, well-documented config file, third-party developers can build out an
 options panel limited only by their own imagination in a fraction of the time
 it would take to build from the ground up!
 
-Redux is an ever-changing, living system. Want to stay up to date or
-contribute? Subscribe to one of our mailing lists or join us on [Twitter](https://twitter.com/reduxframework) or [Github](https://github.com/ReduxFramework/ReduxFramework)!
-
-NOTE: Redux is not intended to be used on its own. It requires a config file
-provided by a third-party theme or plugin developer to actual do anything
-cool!
-
 = Online Demo =
 Don't take our word for it, check out our online demo and try Redux without installing a thing!
 [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
@@ -41,9 +34,8 @@ You can find [docs](http://reduxframework.com/docs/), [FAQs](http://reduxframewo
 = Redux Framework Needs Your Support =
 It is hard to continue development and support for this free plugin without contributions from users like you. If you enjoy using Redux Framework, and find it useful, please consider [making a donation](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U). Your donation will help encourage and support the plugin's continued development and better user support.
 
-=  Features =
-
-**Redux has a vast array of fields:**
+= Fields =
+Hold on to your hats. Here are the fields Redux supports.
 
 * Border
 * Button Set
@@ -74,7 +66,8 @@ It is hard to continue development and support for this free plugin without cont
 * Typography 
  * The most advanced typography module complete with preview, Google fonts, and auto-css output!
 
-** Add to that these amazing features:**
+= Additional Features =
+As if that's not enough, there's more.
 
 * Field Validation
 * Language Packs
@@ -84,11 +77,20 @@ It is hard to continue development and support for this free plugin without cont
 * Outout attribute - Automatically generate CSS and append Google Fonts stylesheet to your theme with you only setting the appropriate CSS selector.
 * Oh, and did we mention a fully integrated Google Webfonts setup that will make you cry?
 
-Redux Framework is the solution for theme and plugin developers alike.
+
+= Redux Framework is the solution for theme and plugin developers alike. =
 
 
 = Translators & Non-English Speakers =
 We need your help to translate Redux into your language. If you have created your own language pack, or have an update of an existing one, you can post [gettext PO and MO files](http://codex.wordpress.org/Translating_WordPress) to the [Github Repo](https://github.com/ReduxFramework/ReduxFramework) via a pull request or you can post an issue with the attached files. You can download the latest [POT file](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/redux.pot), and see the latest [PO files in each language](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/).
+
+= Get Involved =
+Redux is an ever-changing, living system. Want to stay up to date or
+contribute? Subscribe to one of our mailing lists or join us on [Twitter](https://twitter.com/reduxframework) or [Github](https://github.com/ReduxFramework/ReduxFramework)!
+
+NOTE: Redux is not intended to be used on its own. It requires a config file
+provided by a third-party theme or plugin developer to actual do anything
+cool!
 
 
 == Installation ==

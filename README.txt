@@ -71,9 +71,9 @@ It is hard to continue development and support for this free plugin without cont
 * Language Packs
 * Full value escaping
 * Required - Link visibility from parent fields
-	* Set this to affect the visibility of the field on the parent's value.
+ * Set this to affect the visibility of the field on the parent's value.
 * Output CSS Automatically
-	* Redux generates CSS and the appropriate Google Fonts stylesheets for you on select fields. You need only specify the CSS selector to apply the CSS to (limited to certain fields).
+ * Redux generates CSS and the appropriate Google Fonts stylesheets for you on select fields. You need only specify the CSS selector to apply the CSS to (limited to certain fields).
 * Oh, and did we mention a fully integrated Google Webfonts setup that will make you so happy you'll want to cry?
 
 

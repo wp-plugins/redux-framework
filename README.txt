@@ -69,6 +69,6 @@ Visit our website at [http://reduxframework.com/](http://reduxframework.com/
 = 3.0 =
 Redux is now hosted on Wordpress.org! Update in order to get proper, stable updates.
 
-== Arbitrary section ==
+== Attribution ==
 
 Redux is primarily based on [NHP](https://github.com/leemason/NHP-Theme-Options-Framework) and [SMOF](https://github.com/syamilmj/Options-Framework "Slightly Modified Options Framework").

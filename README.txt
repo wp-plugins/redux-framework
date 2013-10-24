@@ -63,7 +63,8 @@ On the Plugins page, beneith the description and an activated Redux Framework, y
 4. Include the sample-config.php file: `require_once(dirname(__FILE__).'/sample/sample-config.php');` in your theme functions.php file or within your plugin's init file.
 5. Modify the sample file to your heart's content.
 
-= For complete documentation and examples please visit: [http://reduxframework.com/docs/](http://reduxframework.com/docs/) =
+= For Complete Documentation and Examples =
+Visit: [http://reduxframework.com/docs/](http://reduxframework.com/docs/)
 
 
 == Frequently Asked Questions ==

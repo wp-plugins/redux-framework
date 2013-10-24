@@ -36,7 +36,6 @@ It is hard to continue development and support for this free plugin without cont
 
 = Fields =
 Hold on to your hats. Here are the fields Redux supports.
-
 * Border
 * Button Set
 * Checkbox / Multi-Check
@@ -68,19 +67,20 @@ Hold on to your hats. Here are the fields Redux supports.
 
 = Additional Features =
 As if that's not enough, there's more.
-
 * Field Validation
 * Language Packs
 * Full value escaping
 * Required - Link visibility from parent fields
 	* Set this to affect the visibility of the field on the parent's value.
-* Outout attribute - Automatically generate CSS and append Google Fonts stylesheet to your theme with you only setting the appropriate CSS selector.
-* Oh, and did we mention a fully integrated Google Webfonts setup that will make you cry?
+* Output CSS Automatically
+	* Redux generates CSS and the appropriate Google Fonts stylesheets for you on select fields. You need only specify the CSS selector to apply the CSS to (limited to certain fields).
+* Oh, and did we mention a fully integrated Google Webfonts setup that will make you so happy you'll want to cry?
 
 
 = Redux Framework is the solution for theme and plugin developers alike. =
+At least we think so, we hope you feel the same.
 
-
+  
 = Translators & Non-English Speakers =
 We need your help to translate Redux into your language. If you have created your own language pack, or have an update of an existing one, you can post [gettext PO and MO files](http://codex.wordpress.org/Translating_WordPress) to the [Github Repo](https://github.com/ReduxFramework/ReduxFramework) via a pull request or you can post an issue with the attached files. You can download the latest [POT file](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/redux.pot), and see the latest [PO files in each language](http://plugins.svn.wordpress.org/redux-framework/trunk/ReduxCore/languages/).
 

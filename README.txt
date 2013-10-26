@@ -97,7 +97,6 @@ NOTE: Redux is not intended to be used on its own. It requires a config file
 provided by a third-party theme or plugin developer to actual do anything
 cool!
 
-
 == Installation ==
 
 = Install the Plugin =

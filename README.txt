@@ -131,7 +131,10 @@ That's because the real FAQ section is one our site! Please visit [http://reduxf
 
 == Changelog ==
 
-= 3.0.0 =
+= 3.0.2 =
+* Improvements to slides, various field fixes and improvements. Also fixed a few user submitted issues.
+
+= 3.0.1 =
 * Backing out a bit of submitted code that caused the input field to not properly break.
 
 = 3.0.0 =

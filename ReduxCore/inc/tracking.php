@@ -8,7 +8,7 @@ if ( !class_exists( 'ReduxFramework' ) ) {
 }
 
 /**
- * Class that creates the tracking functionality for WP SEO, as the core class might be used in more plugins,
+ * Class that creates the tracking functionality for Redux, as the core class might be used in more plugins,
  * it's checked for existence first.
  *
  * NOTE: this functionality is opt-in. Disabling the tracking in the settings or saying no when asked will cause
@@ -17,10 +17,14 @@ if ( !class_exists( 'ReduxFramework' ) ) {
 
 
 if ( !class_exists( 'Redux_Tracking' ) ) {
+	/**
+	 * Class Redux_Tracking
+	 */
 	class Redux_Tracking extends ReduxFramework {
 
 		/**
 		 * Class constructor
+		 * @param ReduxFramework $parent
 		 */
 		function __construct($parent){
 
@@ -229,10 +233,14 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 						'spam'     => $comments_count->spam,
 						'pings'    => $wpdb->get_var( "SELECT COUNT(comment_ID) FROM $wpdb->comments WHERE comment_type = 'pingback'" ),
 					),
-					'options'  => apply_filters( 'Redux/Tracking/Filters', array() ),
+					'options'  => apply_filters( 'redux/tracking/options', array() ),
 					'theme'    => $theme,
+					'developer'=> apply_filters( 'redux/tracking/developer', array() ),
 					'plugins'  => $plugins,
 				);
+				if (empty($data['developer'])) {
+					unset($data['developer']);
+				}
 
 				$args = array(
 					'body' => $data
@@ -248,7 +256,7 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 
 
 	/**
-	 * Adds tracking parameters for WP SEO settings. Outside of the main class as the class could also be in use in other plugins.
+	 * Adds tracking parameters for Redux settings. Outside of the main class as the class could also be in use in other plugins.
 	 *
 	 * @param array $options
 	 * @return array
@@ -262,7 +270,7 @@ if ( !class_exists( 'Redux_Tracking' ) ) {
 		return $options;
 	}
 
-	add_filter( 'Redux/Tracking/Filters', 'redux_tracking_additions' );
+	add_filter( 'Redux/Tracking/Options', 'redux_tracking_additions' );
 
 
 	function redux_allow_tracking_callback() {

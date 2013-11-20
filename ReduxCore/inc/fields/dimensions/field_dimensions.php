@@ -10,7 +10,7 @@ class ReduxFramework_dimensions extends ReduxFramework{
 	*/
 	function __construct($field = array(), $value ='', $parent){
 		
-		parent::__construct($parent->sections, $parent->args, $parent->extra_tabs);
+		parent::__construct($parent->sections, $parent->args);
 		$this->field = $field;
 		$this->value = $value;
 		//$this->render();
@@ -37,25 +37,28 @@ class ReduxFramework_dimensions extends ReduxFramework{
  
 		$this->field = wp_parse_args( $this->field, $defaults );
 
-		if ( isset( $this->field['units'] ) && !in_array($this->field['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
-			unset( $this->field['units'] );
-		}	
+		if ( isset( $this->field['units'] ) && !is_array( $this->field['units'] ) ) {
 
-		if ( isset( $this->value['units'] ) && !in_array($this->value['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
-			unset( $this->value['units'] );
-		}
+			if ( isset( $this->field['units'] ) && !in_array($this->field['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
+				unset( $this->field['units'] );
+			}	
 
-		if ( isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // Value should equal field units
-			$this->value['units'] = $this->field['units'];
-		} else if ( !isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // If both undefined
-			$this->field['units'] = 'px';
-			$this->value['units'] = 'px';
-		} else if ( !isset( $this->field['units'] ) && isset( $this->value['units'] ) ) { // If Value is defined
-			if ( empty( $this->value['units'] ) ) { // Value can't be empty in this case for this field
+			if ( isset( $this->value['units'] ) && !in_array($this->value['units'], array( '', '%', 'in', 'cm', 'mm', 'em', 'ex', 'pt', 'pc', 'px' ) ) ) {
+				unset( $this->value['units'] );
+			}
+
+			if ( isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // Value should equal field units
+				$this->value['units'] = $this->field['units'];
+			} else if ( !isset( $this->field['units'] ) && !isset( $this->value['units'] ) ) { // If both undefined
 				$this->field['units'] = 'px';
 				$this->value['units'] = 'px';
-			} else {
-				$this->field['units'] = $this->value['units'];	// Make the field have it
+			} else if ( !isset( $this->field['units'] ) && isset( $this->value['units'] ) ) { // If Value is defined
+				if ( empty( $this->value['units'] ) ) { // Value can't be empty in this case for this field
+					$this->field['units'] = 'px';
+					$this->value['units'] = 'px';
+				} else {
+					$this->field['units'] = $this->value['units'];	// Make the field have it
+				}
 			}
 		}
 
@@ -73,14 +76,14 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			**/
 			if ($this->field['width'] === true):
 				if ( !empty($this->value['width'] ) &&  strpos( $this->value['width'], $this->value['units'] ) === false ) {
-					$this->value['width'] = filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT);
+					$this->value['width'] = filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 					if ($this->field['units'] !== false ) {
 						$this->value['width'] .= $this->value['units'];	
 					}
 				}				
 				echo '<div class="field-dimensions-input input-prepend">';
-				echo '<span class="add-on"><i class="icon-resize-horizontal icon-large"></i></span>';
-				echo '<input type="text" class="redux-dimensions-input redux-dimensions-width mini'.$this->field['class'].'" placeholder="'.__('Width','redux-framework').'" rel="'.$this->field['id'].'-width" value="'.filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_INT).'">';
+				echo '<span class="add-on"><i class="el-icon-resize-horizontal icon-large"></i></span>';
+				echo '<input type="text" class="redux-dimensions-input redux-dimensions-width mini'.$this->field['class'].'" placeholder="'.__('Width','redux-framework').'" rel="'.$this->field['id'].'-width" value="'.filter_var($this->value['width'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION).'">';
 				echo '<input data-id="'.$this->field['id'].'" type="hidden" id="'.$this->field['id'].'-width" name="'.$this->args['opt_name'].'['.$this->field['id'].'][width]" value="'.$this->value['width'].'"></div>';
 		  	endif;
 
@@ -89,14 +92,14 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			**/
 			if ($this->field['height'] === true):
 				if ( !empty($this->value['height'] ) &&  strpos( $this->value['height'], $this->value['units'] ) === false ) {
-					$this->value['height'] = filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT);
+					$this->value['height'] = filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION);
 					if ($this->field['units'] !== false ) {
 						$this->value['height'] .= $this->value['units'];	
 					}
 				}					
 				echo '<div class="field-dimensions-input input-prepend">';
-				echo '<span class="add-on"><i class="icon-resize-vertical icon-large"></i></span>';
-				echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini'.$this->field['class'].'" placeholder="'.__('height','redux-framework').'" rel="'.$this->field['id'].'-height" value="'.filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_INT).'">';
+				echo '<span class="add-on"><i class="el-icon-resize-vertical icon-large"></i></span>';
+				echo '<input type="text" class="redux-dimensions-input redux-dimensions-height mini'.$this->field['class'].'" placeholder="'.__('height','redux-framework').'" rel="'.$this->field['id'].'-height" value="'.filter_var($this->value['height'], FILTER_SANITIZE_NUMBER_FLOAT, FILTER_FLAG_ALLOW_FRACTION).'">';
 				echo '<input data-id="'.$this->field['id'].'" type="hidden" id="'.$this->field['id'].'-height" name="'.$this->args['opt_name'].'['.$this->field['id'].'][height]" value="'.$this->value['height'].'"></div>';
 		  	endif;
 
@@ -104,7 +107,7 @@ class ReduxFramework_dimensions extends ReduxFramework{
 			Units
 			**/
 
-			if ( $this->field['units'] !== false && !isset( $this->field['units'] ) ):
+			if ( isset( $this->field['units'] ) && $this->field['units'] !== false ):
 
 				echo '<div class="select_wrapper dimensions-units" original-title="'.__('Units','redux-framework').'">';
 				echo '<select data-id="'.$this->field['id'].'" data-placeholder="'.__('Units','redux-framework').'" class="redux-dimensions redux-dimensions-units select'.$this->field['class'].'" original-title="'.__('Units','redux-framework').'" name="'.$this->args['opt_name'].'['.$this->field['id'].'][units]">';
@@ -113,6 +116,9 @@ class ReduxFramework_dimensions extends ReduxFramework{
 					$testUnits = array('px', 'em', '%', 'in', 'cm', 'mm', 'ex', 'pt', 'pc');	
 				} else {
 					$testUnits = array('px', 'em', '%');
+				}
+				if ( $this->field['units'] != "" && is_array( $this->field['units'] ) ) {
+					$testUnits = $this->field['units'];
 				}
 				
 				if ( in_array($this->field['units'], $testUnits) ) {

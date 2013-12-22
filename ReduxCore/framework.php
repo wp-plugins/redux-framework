@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.1.2 
+ * @version     3.1.4 
  */
 
 // Exit if accessed directly
@@ -38,7 +38,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
     class ReduxFramework {
 
-        public static $_version = '3.1.3';
+        public static $_version = '3.1.4';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -571,7 +571,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 $data[$name] = ucfirst($name);
                             }
                         }
-					} else if ($type == "tags" || $type == "tag") {
+					} else if ($type == "tags" || $type == "tag") { // NOT WORKING!
 						$tags = get_tags($args); 
 						if (!empty($tags)) {
 							foreach ( $tags as $tag ) {
@@ -1231,7 +1231,6 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @return      void
          */
         public function _download_options(){
-            echo "here";
             /** @noinspection PhpUndefinedConstantInspection */
             if( !isset( $_GET['secret'] ) || $_GET['secret'] != md5( AUTH_KEY . SECURE_AUTH_KEY ) ) {
                 wp_die( 'Invalid Secret for options use' );

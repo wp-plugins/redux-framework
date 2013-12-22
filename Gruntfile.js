@@ -37,6 +37,7 @@ module.exports = function(grunt) {
     },
     'gh-pages': {
       options: {
+        base: 'docs',
         message: 'Update docs and files to distribute'
       },
       dev: {
@@ -214,7 +215,7 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-less');
 
   // Default task(s).
-  grunt.registerTask('default', ['jshint', 'concat:core', 'uglify:core', 'uglify:extensions',  'concat:vendor', 'uglify:vendor']);
+  grunt.registerTask('default', ['jshint', 'concat:core', 'uglify:core', 'uglify:extensions',  'concat:vendor', 'uglify:vendor', "less:production", "less:development", "less:extensions"]);
   grunt.registerTask('travis', ['jshint', 'lintPHP']);
 
   // this would be run by typing "grunt test" on the command line

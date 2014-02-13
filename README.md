@@ -1,11 +1,24 @@
+# Attend the Redux Framework Webinar
+We are holding a webinar Saturday, February 15 @ 19:00 GMT. Please stop by to learn all things Redux and get any help you may need or want. Registration is now open: https://www2.gotomeeting.com/register/180324930
+
+ 
+--------
+
+
+
 # Redux Options Framework [![Build Status](https://travis-ci.org/ReduxFramework/ReduxFramework.png?branch=master)](https://travis-ci.org/ReduxFramework/ReduxFramework) [![Stories in Ready](https://badge.waffle.io/ReduxFramework/ReduxFramework.png?label=ready)](https://waffle.io/ReduxFramework/ReduxFramework)
 
 WordPress options framework which uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API "WordPress Settings API"), Custom Error/Validation Handling, Custom Field/Validation Types, and import/export functionality.
 
-## SMOF (Simple Modified Option Users) Users, this one's for you! ##
+## SMOF (Simple Modified Option Users) Converter! ##
 
 Hot off the press, our Redux Converter plugin. It takes your SMOF instance, and allows you to try out Redux without any fear. It also spits out valid PHP source for you if you want to migrate complete with data migration! Give it a try today. It will be in the WordPress.org repo shortly.  ;)
 https://github.com/ReduxFramework/redux-converter
+
+## Help Us Translate Redux ##
+
+Please head over to the wiki to learn how you can help us translate Redux quickly. Any and all are welcome. We appreciate your help!
+https://github.com/ReduxFramework/ReduxFramework/wiki/translate
 
 ## Getting Started with Redux ##
 
@@ -60,6 +73,51 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ## Changelog ##
 
 ### Master ###
+
+= 3.1.6 =
+* Fixed:    CSS spacing issue
+* Fixed:    Customizer now works and doesn't break other customizer fields outside of Redux.
+* Fixed:    Several minor bug fixes
+* Added:    Metabox support via extension http://reduxframework.com/extensions/
+* Added:    Admin-bar menu
+* Fixed:    Section field now folds.
+* Fixed:    wp_content_dir path now handles double forward slashes.
+* Fixed:    Typography field missing italics in Google fonts.
+* Fixed:    Default color in border field not saving properly.
+* Fixed:    hex2rgba in class.redux_helpers.php changed to static.
+* Fixed:    'sortable' field type not saving options as default.
+* Fixed:    Specified default color not set when clicking the color box default button.
+* Fixed:    Sorter field options are now saved as default in database.
+* Fixed:    Issues with checkboxes displaying default values instead of labels.
+* Fixed:    Outstanding render issues with spacing field.
+* Fixed:    Plugins using Redux from load failure.
+* Fixed:    'not_empty' field validation.
+* Fixed:    Media field.
+* Added:    'read-only' option for media text field.
+* Added:    'mode' option to image_select, so CSS output element may be specified.
+* Added:    Admin Bar menu for option panel.
+* Modified: Removed raw_align field and added align option to raw field.  See wiki for more info.
+* Modified: media field 'read-only' to 'readonly' to vonform to HTML standards.
+* Removed:  EDD extension. It never belonged in Core and will be re-released as a downloadable extension shortly
+* Removed:  Group field, temporarily.
+* Removed:  wp_get_current_user check.  See https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
+ 
+= 3.1.5 =
+* Typography font arrays may not contain comma spaces.
+* Merge in pull request - 542, code cleanup and better readability
+* Change how HTML is output to support metaboxes
+* CSS only on pages that matter, better checks.
+* font-backup in typography now appends to font-family in output and compiler.
+* More fixes for Google font css outputting.
+* Addded output and compiler to field_image_select.  Images will be output as 'background-image'.
+* Fixed output in field_background.
+* Prevent standard fonts from outputting to Google fonts CSS call.
+* class_exists in field_section checking for incorrect classname.
+* sample_config fix.
+* Compiler not outputting CSS without output set to comthing other than false.
+* Google fonts not rendering on frontend.
+* Rewrote sample_config as a class
+
 = 3.1.4 =
 * Fixed error in redux-framework.php.
 * Added select_image field.

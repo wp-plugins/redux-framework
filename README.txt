@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings
 Requires at least: 3.5.1
 Tested up to: 3.8.1
-Stable tag: 3.1.6
+Stable tag: 3.1.8
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -144,6 +144,29 @@ That's because the real FAQ section is on our site! Please visit [http://reduxfr
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.1.8 =
+* Fixed:    Improper enqueue in tracking class.
+* Fixed:    Few classes missed for various fields.
+* Fixed:    Spacing field kicking back notices and warnings when 'output' wasn't set.
+* Modified: Added file_exists check to all include lines in framework.php
+* Fixed:    Background field now works with dynamic preview as it should.
+* Fixed:    Extension fields now enqueueing properly.
+* Added:    Text-align to typography field.
+* Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
+* Fixed:    On and Off for switch field not displaying language translation.
+* Fixed:    email validation allowing a blank field.
+* Fixed:    Now allow for empty values as valid keys.
+* Added:    Dismiss option to admin notices (internal function)
+
+= 3.1.7 =
+* Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
+* Fixed:    On and Off for switch field not displaying language translation.
+* Fixed:    email validation allowing a blank field.
+* Added:    Dismiss option to admin notices (internal function)
+* Fixed:    On and Off for switch field not displaying language translation.
+* Fixed:    email validation allowing a blank field.
+* Added:    Dismiss option to admin notices (internal function)
 
 = 3.1.6 =
 * Fixed:    CSS spacing issue

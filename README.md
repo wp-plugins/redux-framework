@@ -1,5 +1,5 @@
-# Attend the Redux Framework Webinar
-We are holding a webinar Saturday, February 15 @ 19:00 GMT. Please stop by to learn all things Redux and get any help you may need or want. Registration is now open: https://www2.gotomeeting.com/register/180324930
+# The Redux Framework Webinar was a SMASHING success!
+A **huge** thank you to everyone who showed up to support us in our first Redux Framework webinar.  It was a pleasure to meet and interact with all of you.  For those who missed it - or were unable to attend -  a video of the event is here: http://youtu.be/ymMpeBaaLXI.  Stay tuned for details on our next webinar, coming in March of 2014!  - Dovy, Dan, and Kevin
 
  
 --------
@@ -73,6 +73,20 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ## Changelog ##
 
 ### Master ###
+
+= 3.1.8 =
+* Fixed:    Improper enqueue in tracking class.
+* Fixed:    Few classes missed for various fields.
+* Fixed:    Spacing field kicking back notices and warnings when 'output' wasn't set.
+* Modified: Added file_exists check to all include lines in framework.php
+* Fixed:    Background field now works with dynamic preview as it should.
+* Fixed:    Extension fields now enqueueing properly.
+* Added:    Text-align to typography field.
+* Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
+* Fixed:    On and Off for switch field not displaying language translation.
+* Fixed:    email validation allowing a blank field.
+* Fixed:    Now allow for empty values as valid keys.
+* Added:    Dismiss option to admin notices (internal function)
 
 = 3.1.6 =
 * Fixed:    CSS spacing issue

@@ -16,7 +16,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.1.5
+ * @version     3.1.8
  */
 
 // Exit if accessed directly
@@ -49,7 +49,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.1.6';
+        public static $_version = '3.1.8';
         public static $_dir;
         public static $_url;
         public static $_properties;
@@ -58,11 +58,11 @@ if( !class_exists( 'ReduxFramework' ) ) {
         static function init() {
 
             // Windows-proof constants: replace backward by forward slashes. Thanks to: @peterbouwmeester
-            self::$_dir     = trailingslashit( str_replace( '\\', '/', dirname( __FILE__ ) ) );
-            $wp_content_dir = trailingslashit( str_replace( '\\', '/', WP_CONTENT_DIR ) );
+            self::$_dir     = trailingslashit( Redux_Helpers::cleanFilePath( dirname( __FILE__ ) ) );
+            $wp_content_dir = trailingslashit( Redux_Helpers::cleanFilePath( WP_CONTENT_DIR ) );
             $wp_content_dir = trailingslashit( str_replace( '//', '/', $wp_content_dir ) );
             $relative_url   = str_replace( $wp_content_dir, '', self::$_dir );
-            $wp_content_url = ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL );
+            $wp_content_url = Redux_Helpers::cleanFilePath( ( is_ssl() ? str_replace( 'http://', 'https://', WP_CONTENT_URL ) : WP_CONTENT_URL ) );
             self::$_url     = trailingslashit( $wp_content_url ) . $relative_url;                     
 
             // See if Redux is a plugin or not
@@ -399,6 +399,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                 // Display admin notices
                 add_action( 'admin_notices', array( $this, '_admin_notices' ) );
 
+                // Check for dismissed admin notices.
+                add_action( 'admin_init', array( $this, '_dismiss_admin_notice' ) );
+
                 // Enqueue the admin page CSS and JS
                 if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
                     add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ) );
@@ -433,14 +436,70 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
         } // __construct()
 
-        function _admin_notices() {
+        public function _admin_notices() {
+            global $current_user, $pagenow;
+
+            // Check for an active admin notice array
             if (!empty($this->admin_notices)) {
+
+                // Enum admin notices
                 foreach( $this->admin_notices as $notice ) {
-                    echo '<div class="'.$notice['type'].'"><p>' . $notice['msg'] . '</p></div>';
+                    if (true == $notice['dismiss']) {
+                        
+                        // Get user ID
+                        $userid = $current_user->ID;
+                        
+                        if ( !get_user_meta( $userid, 'ignore_' . $notice['id'] ) ) {
+                            
+                            // Check if we are on admin.php.  If we are, we have
+                            // to get the current page slug and tab, so we can
+                            // feed it back to Wordpress.  Why>  admin.php cannot
+                            // be accessed without the page parameter.  We add the
+                            // tab to return the user to the last panel they were
+                            // on.
+                            if ($pagenow == 'admin.php') {
+                                
+                                // Get the current page.  To avoid errors, we'll set
+                                // the redux page slug if the GET is empty.
+                                $pageName   = empty($_GET['page']) ? '&amp;page=' . $this->args['page_slug'] : '&amp;page=' . $_GET['page'];
+                                
+                                // Ditto for the current tab.
+                                $curTab     = empty($_GET['tab']) ? '&amp;tab=0' : '&amp;tab=' . $_GET['tab'];
+                            }   
+                            
+                            // Print the notice with the dismiss link
+                            echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '&nbsp;&nbsp;<a href="?dismiss=true&amp;id=' . $notice['id'] . $pageName . $curTab . '">' . __('Dismiss', $this->args['domain']) . '</a>.</p></div>';
+                        }                        
+                    } else {
+                        
+                        // Standard notice
+                        echo '<div class="' . $notice['type'] . '"><p>' . $notice['msg'] . '</a>.</p></div>';
+                    }
+
                 }
+                
+                // Clear the admin notice array
                 $this->admin_notices = array();
+                
             }
         }
+
+        public function _dismiss_admin_notice() {
+	        global $current_user;
+            
+	        // Verify the dismiss and id parameters are present.
+	        if ( isset( $_GET['dismiss'] ) && 'true' == $_GET['dismiss'] && isset( $_GET['id']  ) ) {
+                
+                // Get the user id
+                $userid = $current_user->ID;
+                
+                // Get the notice id
+                $id = $_GET['id'];
+                
+                // Add the dismiss request to the user meta.
+	            add_user_meta( $userid, 'ignore_' . $id, 'true', true );
+	        }
+	    }
 
         /**
          * Load the plugin text domain for translation.
@@ -787,6 +846,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             }
                         }
                     }else if ($type == "callback") {
+                        if ( !is_array( $args ) ) {
+                            $args = array( $args );
+                        }
                         $data = call_user_func($args[0]);
                     }//if           
                 }//if
@@ -1189,7 +1251,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                 
                                 if( $class_file && file_exists($class_file) && !class_exists( $field_class ) ) {
                                     /** @noinspection PhpIncludeInspection */
-                                    require_once( $class_file );
+                              	    require_once( $class_file );
                                 }
                             }   
 
@@ -1402,7 +1464,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             if( $class_file ) {
                                 if( !class_exists($field_class) ) {
                                     /** @noinspection PhpIncludeInspection */
-                                    require_once( $class_file );
+                                    if (file_exists($class_file)) {
+                                    	require_once( $class_file );
+                                    }
                                 }
 
                                 
@@ -1413,10 +1477,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                                     }
                                     $theField = new $field_class( $field, $this->options[$field['id']], $this );
                                     
-                                    if ( !wp_script_is( 'redux-field-'.$field['type'].'-js', 'enqueued' ) && class_exists($field_class) && $this->args['dev_mode'] === true && method_exists( $field_class, 'enqueue' ) ) {
-                                        /** @noinspection PhpUndefinedMethodInspection */
-                                        //echo "DOVY";
-                                        $theField->enqueue();    
+                                    // Move dev_mode check to a new if/then block
+                                    if ( !wp_script_is( 'redux-field-'.$field['type'].'-js', 'enqueued' ) && class_exists($field_class) && method_exists( $field_class, 'enqueue' ) ) {
+                                    	
+                                    	// Checking for extension field AND dev_mode = false OR dev_mode = true
+                                    	// Since extension fields use 'extension_dir' exclusively, we can detect them here.
+                                    	// Also checking for dev_mode = true doesn't mess up the JS combinine.
+					if ($this->args['dev_mode'] === false && isset($theField->extension_dir) && (!'' == $theField->extension_dir)  || ($this->args['dev_mode'] === true)) {
+                                            /** @noinspection PhpUndefinedMethodInspection */
+                                            $theField->enqueue();
+                                        }
                                     }
                                     if ( method_exists( $field_class, 'localize' ) ) {
                                         /** @noinspection PhpUndefinedMethodInspection */
@@ -1813,12 +1883,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         // TODO AFTER GROUP WORKS - Remove IF statement
                         
                         if ( $field['type'] == "group" && isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                            if ( $this->args['dev_mode'] ) {
+                            //if ( $this->args['dev_mode'] ) {
                                 $this->admin_notices[] = array(
-                                    'type' => 'error',
-                                    'msg' => 'The <strong>group field</strong> has been <strong>removed</strong> until it works better. This message will only appear in dev_mode.',
+                                    'type'      => 'error',
+                                    'msg'       => 'The <strong>group field</strong> has been <strong>removed</strong> while we retool it for improved performance.',
+                                    'id'        => 'group_err',
+                                    'dismiss'   => true,
                                 );
-                            }
+                            //}
                             continue; // Disabled for now
                         }
                         if (isset($field['permissions'])) {
@@ -2003,7 +2075,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
-                        require_once( $class_file );
+                        if (file_exists($class_file)) {
+                            require_once( $class_file );
+                        }
                         /** @noinspection PhpUnusedLocalVariableInspection */
                         $extension = new $extension_class( $this );                                            
                     }
@@ -2054,8 +2128,14 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     $plugin_options['REDUX_imported'] = 1;
                     foreach($imported_options as $key => $value) {
                         $plugin_options[$key] = $value;
-                    }                    
-                    
+                    } 
+
+                    /**
+                     * action 'redux/options/{opt_name}/import'
+                     * @param  &array [&$plugin_options, redux_options]
+                     */
+                    do_action_ref_array( "redux/options/{$this->args['opt_name']}/import", array(&$plugin_options, $imported_options));
+
                     // Remove the import/export tab cookie.
                     if( $_COOKIE['redux_current_tab'] == 'import_export_default' ) {
                         setcookie( 'redux_current_tab', '', 1, '/' );
@@ -2167,7 +2247,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                         if (isset($field['validate'])) {
                             
                             // Make sure 'validate field' is set to 'not_empty'
-                            if ($field['validate'] == 'not_empty') {
+                            if ($field['validate'] == 'not_empty' || $field['validate'] == 'email') {
                                 
                                 // Set the flag.
                                 $isNotEmpty = true;
@@ -2215,7 +2295,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                                 if( $class_file ) {
                                     /** @noinspection PhpIncludeInspection */
-                                    require_once( $class_file );
+                                    if ( file_exists( $class_file ) ) {
+                                    	require_once( $class_file );
+                                    }
                                 }
 
                             }
@@ -2749,7 +2831,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
          * @param string $v
          * @return      void
          */
-        public function _field_input( $field, $v = "" ) {
+        public function _field_input( $field, $v = null ) {
 
             if( isset( $field['callback'] ) && function_exists( $field['callback'] ) ) {
                $value = ( isset( $this->options[$field['id']] ) ) ? $this->options[$field['id']] : '';
@@ -2813,14 +2895,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     
                     if( $class_file ) {
                         /** @noinspection PhpIncludeInspection */
-                        require_once($class_file);
+                        if (file_exists($class_file)) {
+                            require_once($class_file);
+                        }
                     }
 
                 }
 
                 if( class_exists( $field_class ) ) {
                     $value = isset($this->options[$field['id']])?$this->options[$field['id']]:'';
-                    if ($v != "") {
+                    if ( $v !== null ) {
                         $value = $v;
                     }
                     /**
@@ -3160,4 +3244,5 @@ if( !class_exists( 'ReduxFramework' ) ) {
     //add_action( 'plugins_loaded', ReduxFramework::init(), 0 );
 
 } // class_exists('ReduxFramework')
+
 

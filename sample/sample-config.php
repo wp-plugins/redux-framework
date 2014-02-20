@@ -15,7 +15,7 @@ if (!class_exists("Redux_Framework_sample_config")) {
 
         public function __construct() {
             // This is needed. Bah WordPress bugs.  ;)
-            if ( defined('TEMPLATEPATH') && strpos(__FILE__,TEMPLATEPATH) !== false) {
+            if ( defined('TEMPLATEPATH') && strpos( Redux_Helpers::cleanFilePath( __FILE__ ), Redux_Helpers::cleanFilePath( TEMPLATEPATH ) ) !== false) {
                 $this->initSettings();
             } else {
                 add_action('plugins_loaded', array($this, 'initSettings'), 10);    
@@ -580,7 +580,6 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'title' => __('Body Background', 'redux-framework-demo'),
                         'subtitle' => __('Body background with image, color, etc.', 'redux-framework-demo'),
                     //'default' => '#FFFFFF',
-                    //'validate' => 'color',
                     ),
                     array(
                         'id' => 'color-footer',
@@ -1207,11 +1206,61 @@ if (!class_exists("Redux_Framework_sample_config")) {
                         'desc' => __('This is an info field with the success style applied, a header and an icon.', 'redux-framework-demo')
                     ),
                     array(
+                        'id' => 'info_critical',
+                        'type' => 'info',
+                        'style' => 'critical',
+                        'icon' => 'el-icon-info-sign',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info field with the critical style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
                         'id' => 'raw_info',
                         'type' => 'info',
                         'required' => array('18', 'equals', array('1', '2')),
                         'raw_html' => true,
                         'desc' => $sampleHTML,
+                    ),
+                    array(
+                        'id' => 'notice_normal',
+                        'type' => 'info',
+                        'notice' => true,
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info notice field with the normal style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
+                        'id' => 'notice_info',
+                        'type' => 'info',
+                        'notice' => true,
+                        'style' => 'info',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info notice field with the info style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
+                        'id' => 'notice_warning',
+                        'type' => 'info',
+                        'notice' => true,
+                        'style' => 'warning',
+                        'icon' => 'el-icon-info-sign',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info notice field with the warning style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
+                        'id' => 'notice_success',
+                        'type' => 'info',
+                        'notice' => true,
+                        'style' => 'success',
+                        'icon' => 'el-icon-info-sign',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an info notice field with the success style applied, a header and an icon.', 'redux-framework-demo')
+                    ),
+                    array(
+                        'id' => 'notice_critical',
+                        'type' => 'info',
+                        'notice' => true,
+                        'style' => 'critical',
+                        'icon' => 'el-icon-info-sign',
+                        'title' => __('This is a title.', 'redux-framework-demo'),
+                        'desc' => __('This is an notice field with the critical style applied, a header and an icon.', 'redux-framework-demo')
                     ),
                     array(
                         'id' => "custom_callback",
@@ -1288,6 +1337,8 @@ if (!class_exists("Redux_Framework_sample_config")) {
                 'allow_sub_menu' => true, // Show the sections below the admin menu item or not
                 'menu_title' => __('Sample Options', 'redux-framework-demo'),
                 'page' => __('Sample Options', 'redux-framework-demo'),
+                // You will need to generate a Google API key to use this feature.
+                // Please visit: https://developers.google.com/fonts/docs/developer_api#Auth
                 'google_api_key' => '', // Must be defined to add google fonts to the typography module
                 //'admin_bar' => false, // Show the panel pages on the admin bar
                 'global_variable' => '', // Set a different name for your global variable other than the opt_name

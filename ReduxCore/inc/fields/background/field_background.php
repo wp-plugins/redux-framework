@@ -113,7 +113,7 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
 
                 if ( !isset( $this->field['transparent'] ) || $this->field['transparent'] !== false ) {
                     $tChecked = "";
-                    if ( $this->value == "transparent" ) {
+                    if ( $this->value['background-color'] == "transparent" ) {
                         $tChecked = ' checked="checked"';
                     }
                     echo '<label for="' . $this->field['id'] . '-transparency" class="color-transparency-check"><input type="checkbox" class="checkbox color-transparency redux-background-input ' . $this->field['class'] . '" id="' . $this->field['id'] . '-transparency" data-id="'.$this->field['id'] . '-color" value="1"'.$tChecked.'> '.__('Transparent', 'redux-framework').'</label>';       
@@ -346,11 +346,18 @@ if( !class_exists( 'ReduxFramework_background' ) ) {
          * @return      void
          */
         public function enqueue() {
-
             wp_enqueue_script(
                 'redux-field-background-js',
                 ReduxFramework::$_url . 'inc/fields/background/field_background.js',
                 array( 'jquery', 'wp-color-picker', 'select2-js' ),
+                time(),
+                true
+            );
+
+            wp_enqueue_script(
+                'field-select-js', 
+                ReduxFramework::$_url.'inc/fields/select/field_select.js',
+                array('jquery', 'select2-js'),
                 time(),
                 true
             );

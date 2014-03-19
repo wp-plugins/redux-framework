@@ -48,8 +48,6 @@
 
     });
 
-
-
     $.redux.required = function() {
 
         // Hide the fold elements on load ,
@@ -96,8 +94,6 @@
                 }
             });
         });
-
-
     };
 
     $.redux.check_dependencies = function(variable) {
@@ -127,6 +123,8 @@
                     value2 = check_data.checkValue,
                     show = false,
                     infoFieldID = '',
+                    sectionFieldID = '',
+                    divideFieldID = '',                    
                     value2_array;
 
             var testInfoField = current.find('.redux-field:first');
@@ -135,9 +133,15 @@
             }
 
             // Eat it, Travis!
-            var testInfoField2 = current.find('.redux-field:first');
-            if (testInfoField2.hasClass('redux-container-section')) {
-                infoFieldID = current.find('.redux-container-section').data('id');
+            var testSectionField = current.find('.redux-field:first');
+            if (testSectionField.hasClass('redux-container-section')) {
+                sectionFieldID = current.find('.redux-container-section').data('id');
+            }
+
+            // Divide field
+            var testDivideField = current.find('.redux-field:first');
+            if (testDivideField.hasClass('redux-container-divide')) {
+                divideFieldID = current.find('.redux-container-divide').data('id');
             }
 
             if (!is_hidden) {
@@ -211,14 +215,16 @@
             }
 
             if (show === true && current.is('.hiddenFold')) {
-
                 if (infoFieldID !== "") {
                     $('#info-' + infoFieldID).css({display: 'none'}).fadeIn(300).show();
-                    //$('#section-' + infoFieldID).css({display: 'none'}).fadeIn(300).show();
                 }
 
-                if (infoFieldID !== "") {
-                    $('#section-' + infoFieldID).css({display: 'none'}).fadeIn(300).show();
+                if (sectionFieldID !== "") {
+                    $('#section-' + sectionFieldID).css({display: 'none'}).fadeIn(300).show();
+                }
+
+                if (divideFieldID !== "") {
+                    $('#' + divideFieldID + '-divide').css({display: 'none'}).fadeIn(300).show();
                 }
 
                 current.css({
@@ -230,8 +236,12 @@
                     $('#info-' + infoFieldID).css({display: ''}).fadeOut(300).hide();
                 }
 
-                if (infoFieldID !== "") {
-                    $('#section-' + infoFieldID).css({display: ''}).fadeOut(300).hide();
+                if (sectionFieldID !== "") {
+                    $('#section-' + sectionFieldID).css({display: ''}).fadeOut(300).hide();
+                }
+
+                if (divideFieldID !== "") {
+                    $('#' + divideFieldID + '-divide' ).css({display: ''}).fadeOut(300).hide();
                 }
 
                 current.css({
@@ -308,10 +318,10 @@
             }
         }
     };
-
 })(jQuery);
 
 jQuery.noConflict();
+
 var confirmOnPageExit = function(e) {
     //return; // ONLY FOR DEBUGGING
     // If we haven't been passed the event get the window.event
@@ -325,6 +335,38 @@ var confirmOnPageExit = function(e) {
     // For Chrome, Safari, IE8+ and Opera 12+
     return message;
 };
+
+function verifyPos(s, b) {
+
+    // trim off spaces
+    s = s.replace(/^\s+|\s+$/gm,'');
+
+    // position value is blank, set the default
+    if (s === '' || s.search(' ') == -1) {
+        if (b === true) {
+            return 'top left';
+        } else {
+            return 'bottom right';
+        }
+    }
+
+    // split string into array
+    var split = s.split(' ');
+
+    // Evaluate first string.  Must be top, center, or bottom
+    var paramOne = b ? 'top': 'bottom';
+    if (split[0] == 'top' || split[0] == 'center' || split[0] == 'bottom') {
+        paramOne = split[0];
+    }
+
+    // Evaluate second string.  Must be left, center, or right.
+    var paramTwo = b ? 'left' : 'right';
+    if (split[1] == 'left' || split[1] == 'center' || split[1] == 'right') {
+        paramTwo = split[1];
+    }
+
+    return paramOne + ' ' + paramTwo;
+}
 
 function getContrastColour(hexcolour) {
     // default value is black.
@@ -354,7 +396,7 @@ function getContrastColour(hexcolour) {
 function verify_fold(item) {
 
     jQuery(document).ready(function($) {
-        console.log(verify_fold);
+        //console.log(verify_fold);
 
 
 
@@ -471,13 +513,130 @@ function redux_change(variable) {
 jQuery(document).ready(function($) {
     jQuery('.redux-action_bar, .redux-presets-bar').on('click', function() {
         window.onbeforeunload = null;
-    }); /**	Tipsy @since v1.3 DEPRICATE? */
-    if (jQuery().tipsy) {
-        $('.tips').tipsy({
-            fade: true,
-            gravity: 's',
-            opacity: 0.7
+    }); 
+
+    if (jQuery().qtip){
+        // Shadow
+        var shadow = '';
+        var tip_shadow = redux.args.hints.tip_style.shadow;
+        if (tip_shadow === true) {
+            shadow = 'qtip-shadow';
+        }
+
+        // Color
+        var color = '';
+        var tip_color = redux.args.hints.tip_style.color;
+        if (tip_color !== '') {
+            color = 'qtip-' + tip_color;
+        }
+
+        // Rounded
+        var rounded = '';
+        var tip_rounded = redux.args.hints.tip_style.rounded;
+        if (tip_rounded === true) {
+            rounded = 'qtip-rounded';
+        }
+
+        // Tip style
+        var style = '';
+        var tip_style = redux.args.hints.tip_style.style;
+        if (tip_style !== '') {
+            style = 'qtip-' + tip_style;
+        }
+
+        var classes = shadow + ',' + color + ',' + rounded + ',' + style;
+        classes = classes.replace(/,/g, ' ');
+
+        // Get position data
+        var myPos = redux.args.hints.tip_position.my;
+        var atPos = redux.args.hints.tip_position.at;
+
+        // Gotta be lowercase, and in proper format
+        myPos = verifyPos(myPos.toLowerCase(), true);
+        atPos = verifyPos(atPos.toLowerCase(), false);
+
+        // Tooltip trigger action
+        var showEvent = redux.args.hints.tip_effect.show.event;
+        var hideEvent = redux.args.hints.tip_effect.hide.event;
+        
+        // Tip show effect
+        var tipShowEffect   = redux.args.hints.tip_effect.show.effect;
+        var tipShowDuration = redux.args.hints.tip_effect.show.duration;
+        
+        // Tip hide effect
+        var tipHideEffect   = redux.args.hints.tip_effect.hide.effect;
+        var tipHideDuration = redux.args.hints.tip_effect.hide.duration;
+        
+        $('div.redux-qtip').each(function() {
+            $(this).qtip({         
+
+            content: {
+                text: $(this).attr('qtip-content'),
+                title: $(this).attr('qtip-title')
+            },
+            
+            show: {
+                effect: function () {
+                    switch (tipShowEffect) {
+                        case 'slide':
+                            $(this).slideDown(tipShowDuration);
+                        break;
+                        case 'fade':
+                            $(this).fadeIn(tipShowDuration);
+                        break;        
+                        default:
+                            $(this).show();
+                        break;                            
+                    }
+                },
+                event: showEvent,
+            },
+
+            hide: {
+                effect: function() {
+                    switch (tipHideEffect) {
+                        case 'slide':
+                            $(this).slideUp(tipHideDuration);
+                        break;
+                        case 'fade':
+                            $(this).fadeOut(tipHideDuration);
+                        break;        
+                        default:
+                            $(this).show(tipHideDuration);
+                        break;                            
+                    }
+                },
+               event: hideEvent,
+            },
+
+            style: {
+                classes: classes,
+            },
+
+            position: {
+                my: myPos,
+                at: atPos,
+            },
+            });
         });
+       // });
+
+        $('input[qtip-content]').each(function() {
+            $(this).qtip({ 
+                content: {
+                    text: $(this).attr('qtip-content'),
+                    title: $(this).attr('qtip-title')
+                },
+                show: 'focus',
+                hide: 'blur',
+                style: classes,
+                position: {
+                    my: myPos,
+                    at: atPos,
+
+                },            
+            });
+        });        
     }
 
     $('#toplevel_page_' + redux.args.slug + ' .wp-submenu a, #wp-admin-bar-' + redux.args.slug + ' a.ab-item').click(function(e) {
@@ -569,7 +728,7 @@ jQuery(document).ready(function($) {
     });
 
     function redux_expand_options(parent) {
-        console.log('here');
+        //console.log('here');
         var trigger = parent.find('.expand_options');
         var width = parent.find('.redux-sidebar').width();
         var id = jQuery('.redux-group-menu .active a').data('rel') + '_section_group';
@@ -608,12 +767,7 @@ jQuery(document).ready(function($) {
         redux_expand_options(jQuery(this).parents('.redux-container:first'));
         return false;
     });
-    jQuery('#redux-import').click(function(e) {
-        if (jQuery('#import-code-value').val() === "" && jQuery('#import-link-value').val() === "") {
-            e.preventDefault();
-            return false;
-        }
-    });
+    
     if (jQuery('#redux-save').is(':visible')) {
         jQuery('#redux-save').slideDown();
     }
@@ -624,32 +778,6 @@ jQuery(document).ready(function($) {
         if (!jQuery(this).hasClass('noUpdate')) {
             redux_change(jQuery(this));
         }
-    });
-    jQuery('#redux-import-code-button').click(function() {
-        if (jQuery('#redux-import-link-wrapper').is(':visible')) {
-            jQuery('#redux-import-link-wrapper').fadeOut('fast');
-            jQuery('#import-link-value').val('');
-        }
-        jQuery('#redux-import-code-wrapper').fadeIn('slow');
-    });
-    jQuery('#redux-import-link-button').click(function() {
-        if (jQuery('#redux-import-code-wrapper').is(':visible')) {
-            jQuery('#redux-import-code-wrapper').fadeOut('fast');
-            jQuery('#import-code-value').val('');
-        }
-        jQuery('#redux-import-link-wrapper').fadeIn('slow');
-    });
-    jQuery('#redux-export-code-copy').click(function() {
-        if (jQuery('#redux-export-link-value').is(':visible')) {
-            jQuery('#redux-export-link-value').fadeOut('slow');
-        }
-        jQuery('#redux-export-code').toggle('fade');
-    });
-    jQuery('#redux-export-link').click(function() {
-        if (jQuery('#redux-export-code').is(':visible')) {
-            jQuery('#redux-export-code').fadeOut('slow');
-        }
-        jQuery('#redux-export-link-value').toggle('fade');
     });
 
     /**
@@ -725,7 +853,7 @@ jQuery(document).ready(function($) {
             jQuery("#" + sectionID + "_section_group_li_a").prepend('<span class="redux-menu-error">' + sectionArray.total + '</span>');
             jQuery("#" + sectionID + "_section_group_li_a").addClass("hasError");
             jQuery.each(sectionArray.errors, function(key, value) {
-                console.log(value);
+                //console.log(value);
                 jQuery("#" + redux.args.opt_name + '-' + value.id).addClass("redux-field-error");
                 jQuery("#" + redux.args.opt_name + '-' + value.id).append('<div class="redux-th-error">' + value.msg + '</div>');
             });

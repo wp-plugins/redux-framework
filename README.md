@@ -1,12 +1,12 @@
-# The Redux Framework Webinar was a SMASHING success!
-A **huge** thank you to everyone who showed up to support us in our first Redux Framework webinar.  It was a pleasure to meet and interact with all of you.  For those who missed it - or were unable to attend -  a video of the event is here: http://youtu.be/ymMpeBaaLXI.  Stay tuned for details on our next webinar, coming in March of 2014!  - Dovy, Dan, and Kevin
-
+# [docs.reduxframework.com](http://docs.reduxframework.com)
+Need a little help with Redux?  Come check out our brand new documentation site, chock full of tutorials and examples!
  
+
 --------
 
 
 
-# Redux Options Framework [![Build Status](https://travis-ci.org/ReduxFramework/ReduxFramework.png?branch=master)](https://travis-ci.org/ReduxFramework/ReduxFramework) [![Stories in Ready](https://badge.waffle.io/ReduxFramework/ReduxFramework.png?label=ready)](https://waffle.io/ReduxFramework/ReduxFramework)
+## Redux Options Framework [![Build Status](https://travis-ci.org/ReduxFramework/redux-framework.png?branch=master)](https://travis-ci.org/ReduxFramework/redux-framework) [![Stories in Ready](https://badge.waffle.io/ReduxFramework/redux-framework.png?label=ready)](https://waffle.io/ReduxFramework/redux-framework) [![Built with Grunt](https://cdn.gruntjs.com/builtwith.png)](http://gruntjs.com/)
 
 WordPress options framework which uses the [WordPress Settings API](http://codex.wordpress.org/Settings_API "WordPress Settings API"), Custom Error/Validation Handling, Custom Field/Validation Types, and import/export functionality.
 
@@ -22,7 +22,7 @@ https://github.com/ReduxFramework/ReduxFramework/wiki/translate
 
 ## Getting Started with Redux ##
 
-ReduxFramework has been built from the groud up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same WordPress instance. For a guide on getting started please refer to [http://reduxframework.com/docs/getting-started/](http://reduxframework.com/docs/getting-started/).
+ReduxFramework has been built from the groud up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same WordPress instance. For a guide on getting started please refer to [https://github.com/ReduxFramework/redux-framework/wiki/Getting-Started](https://github.com/ReduxFramework/redux-framework/wiki/Getting-Started).
 
 You can also [download our sample theme available here](https://github.com/ReduxFramework/ReduxSampleTheme) to start developing right away.
 
@@ -73,6 +73,98 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ## Changelog ##
 
 ### Master ###
+
+= 3.1.9.1 =
+* Fixed:      Redux checks for child or parent theme exclusively before loading.
+
+= 3.1.9 =
+* Updated:    RGBA Field stability.  Thank you, SilverKenn.
+
+= 3.1.8.23 =
+* Modified:   Separated Import/Export from the core.  It can now be used as a field.
+
+= 3.1.8.22 =
+* Fixed:      Typography custom preview text/size not outputting.
+* Fixed:      No font selected in typography would default to 'inherit'.
+* Fixed:      Hint feature kicking back a notice if no title was specified.
+
+= 3.1.8.21 =
+* Fixed:      Sortable field, when used a checkboxes, were all checked by default, even when set not to be.
+* Fixed:      button_set field not setting properly in multi mode.
+
+= 3.1.8.20 =
+* Fixed:      Javascript console object not printing options object.
+* Fixed:      Load errors from child themes no longer occur.
+
+= 3.1.8.19 =
+* Modified:   Typography word and letter spacing now accept negative values.
+* Modified:   Typography preview shows spaces between upper and lower case groupings.
+* Fixed:      Compiler output for slider field.
+
+= 3.1.8.18 =
+* Fixed:      update_check produced a fatal error on a local install with no internet connection.
+* Modified:   Google font CSS moved to header so pages will pass HTML5 validation.
+
+= 3.1.8.17 =
+* Fixed:      Compiler hook failing on slider.
+
+= 3.1.8.16 =
+* Fixed:      Error on update_check when the response code was something other than 200.
+* Modified:   Removed Google font CSS line from header (because it's in the footer via wp_enqueue_style.
+
+= 3.1.8.15 =
+* Added:      Admin notice for new builds of Redux on Github as they become available.  This feature is available on in dev_mode, and may be turned off by setting the `update_notice` argument to false.  See the Arguments page of the wiki for more details.
+* Added:      text-transform option for the typography field.
+* Fixed:      image_select images not resizing properly in FF and IE.
+* Fixed:      Layout for the typography field, so everything isn't smushed together.  The new layout is as follows:
+
+              [family-font] [backup-font]
+              [style] [script] [align] [transform]
+              [size] [height] [word space] [letter space]
+              [color]
+
+= 3.1.8.14 =
+* Added:      Newsletter sign-up popup at first load of the Redux options panel.
+
+= 3.1.8.12 =
+* Added:      Added PHP 5.2 support for import/export.
+
+= 3.1.8.11 =
+* Added:      Action hooks for options reset and options reset section.
+* Added:      Theme responsive for date picker.
+
+= 3.1.8.10 =
+* Added:      New slider.  Better looking UI, double handles and support for floating point values.  See the wiki for more info.
+
+= 3.1.8.9 =
+* Fixed:      link_color field showing notice on default, if user enters no defaults.
+* Fixed:      Fixed tab notice in framework.php if no tab parameter is set in URL.
+
+= 3.1.8.8 =
+* Added:      Typography improvements.
+
+= 3.1.8.7 =
+* Added:      Hints!  More info:  https://github.com/ReduxFramework/ReduxFramework/wiki/Using-Hints-in-Fields
+
+= 3.1.8.6 =
+* Added:      Complete Wordpress admin color styles. Blessed LESS/SCSS mixins.  ;)
+
+= 3.1.8.5 =
+* Added:      Font family not required for the typography module any longer.
+
+= 3.1.8.4 =
+* Added:      Support for using the divide field in folding.
+* Added:      Error trapping in typography.js for those still attempting to use typography with no font-family.
+
+= 3.1.8.3 =
+* Added:      Full asynchronous font loading.
+* 
+= 3.1.8.2 =
+* Added:      email_not_empty validation field.
+* Reverted:   email validation field only checks for valid email.  not_empty check moved to new validation field.
+
+= 3.1.8.1 =
+* Fixed:      Hide demo hook wasn't hiding demo links.
 
 = 3.1.8 =
 * Fixed:    Improper enqueue in tracking class.

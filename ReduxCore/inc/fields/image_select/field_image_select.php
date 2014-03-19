@@ -31,7 +31,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
      *
      * @since       1.0.0
      */
-    class ReduxFramework_image_select extends ReduxFramework {
+    class ReduxFramework_image_select {
     
         /**
          * Field Constructor.
@@ -63,7 +63,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
         public function render() {
                 
             if( !empty( $this->field['options'] ) ) {
-
+                echo '<div class="redux-table-container">';
                 echo '<ul class="redux-image-select">';
             
                 $x = 1;
@@ -98,7 +98,8 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                         $style .= ';';
                     }
-                    $style .= " max-width: 100%; ";
+                    //$style .= " max-width: 100%; ";
+                    $style .= " width: 100%; ";
 
                     $theValue = $k;
                     if( !empty( $this->field['tiles'] ) && $this->field['tiles'] == true ) {
@@ -170,7 +171,7 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
                 }
                 
                 echo '</ul>';       
-
+                echo '</div>';
             }
 
 
@@ -237,13 +238,14 @@ if( !class_exists( 'ReduxFramework_image_select' ) ) {
 
                 if ( !empty( $this->field['output'] ) && is_array( $this->field['output'] ) ) {
                     $keys = implode(",", $this->field['output']);
+                    $style = $keys . "{" . $style . '}';
                     $this->parent->outputCSS .= $style;
                 }
 
                 if ( !empty( $this->field['compiler'] ) && is_array( $this->field['compiler'] ) ) {
                     $keys = implode(",", $this->field['compiler']);
                     $style = $keys . "{" . $style . '}';
-                    $this->parent->compilerCSS .= $style; //$keys . "{" . $style . '}';
+                    $this->parent->compilerCSS .= $style;
                 }
             }
         }        

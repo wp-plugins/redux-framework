@@ -22,6 +22,7 @@ module.exports = function(grunt) {
                     'ReduxCore/assets/js/vendor/cookie.js',
                     'ReduxCore/assets/js/vendor/qtip/jquery.qtip.js',
                     'ReduxCore/assets/js/vendor/jquery.typewatch.js',
+                    'ReduxCore/assets/js/vendor/jquery.serializeForm.min.js',
                     'ReduxCore/assets/js/vendor/spinner_custom.js',
                     'ReduxCore/assets/js/vendor/jquery.alphanum.js',
                     'ReduxCore/assets/js/vendor/select2.sortable.js',
@@ -36,6 +37,7 @@ module.exports = function(grunt) {
                 src: [
                     'ReduxCore/assets/js/vendor/cookie.js',
                     'ReduxCore/assets/js/vendor/qtip/jquery.qtip.js',
+                    'ReduxCore/assets/js/vendor/jquery.serializeForm.min.js',
                     'ReduxCore/assets/js/vendor/jquery.typewatch.js',
                     'ReduxCore/assets/js/vendor/spinner_custom.js',
                     'ReduxCore/assets/js/vendor/jquery.alphanum.js',
@@ -226,7 +228,6 @@ module.exports = function(grunt) {
 
     grunt.loadNpmTasks('grunt-contrib-uglify');
     grunt.loadNpmTasks('grunt-contrib-jshint');
-    grunt.loadNpmTasks('grunt-contrib-qunit');
     grunt.loadNpmTasks('grunt-contrib-watch');
     grunt.loadNpmTasks('grunt-contrib-concat');
     grunt.loadNpmTasks('grunt-phpdocumentor');

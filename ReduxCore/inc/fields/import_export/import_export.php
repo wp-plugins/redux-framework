@@ -113,11 +113,11 @@ if( !class_exists( 'Redux_import_export' ) ) {
             echo "<p>";
             echo '<textarea class="large-text noUpdate" id="redux-export-code" rows="8">';
 
-            if (version_compare(phpversion(), "5.3.0", ">=")) {
-                echo json_encode( $backup_options, true );
-            } else {
-                echo json_encode( addslashes( $backup_options ) );
-            }
+            //if (version_compare(phpversion(), "5.3.0", ">=")) {
+            //    echo json_encode( $backup_options, true );
+            //} else {
+            echo json_encode( ( $backup_options ) );
+            //}
 
             echo '</textarea>';
 
@@ -130,6 +130,10 @@ if( !class_exists( 'Redux_import_export' ) ) {
             if (true == $bDoClose) {
                 echo '</td></tr></table><table class="form-table no-border" style="margin-top: 0;"><tbody><tr style="border-bottom: 0;"><th></th><td>';
             }
+        }
+        
+        public function in_field(){
+            $this->is_field = Redux_Helpers::isFieldInUse($this->parent, 'import_export');
         }
         
         public function render_tab(){
@@ -187,11 +191,11 @@ if( !class_exists( 'Redux_import_export' ) ) {
             if ( isset( $var['REDUX_imported'] ) ) {
                 unset( $var['REDUX_imported'] );
             }
-            if (version_compare(phpversion(), "5.3.0", ">=")) {
-                echo json_encode( $var, true );
-            } else {
+            //if (version_compare(phpversion(), "5.3.0", ">=")) {
+            //    echo json_encode( $var, true );
+            //} else {
                 echo json_encode( $var );
-            }
+            //}
 
             die();            
         }
@@ -209,11 +213,11 @@ if( !class_exists( 'Redux_import_export' ) ) {
             if ( isset( $var['REDUX_imported'] ) ) {
                 unset( $var['REDUX_imported'] );
             }
-            if (version_compare(phpversion(), "5.3.0", ">=")) {
-                $content = json_encode( $backup_options, true ) ;
-            } else {
-                $content = json_encode( $backup_options );
-            }
+            //if (version_compare(phpversion(), "5.3.0", ">=")) {
+            //    $content = json_encode( $backup_options, true ) ;
+            //} else {
+            $content = json_encode( $backup_options );
+            //}
 
             if( isset( $_GET['action'] ) && $_GET['action'] == 'redux_download_options' ) {
                 header( 'Content-Description: File Transfer' );

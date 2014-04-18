@@ -21,11 +21,12 @@ if (!class_exists('Redux_Framework_sample_config')) {
             }
 
             // This is needed. Bah WordPress bugs.  ;)
-            if (true == Redux_Helpers::isChildTheme() || true == Redux_Helpers::isParentTheme()) {
+            if (  true == Redux_Helpers::isTheme(__FILE__) ) {
                 $this->initSettings();
             } else {
                 add_action('plugins_loaded', array($this, 'initSettings'), 10);
             }
+
         }
 
         public function initSettings() {
@@ -72,7 +73,7 @@ if (!class_exists('Redux_Framework_sample_config')) {
 
          * */
         function compiler_action($options, $css) {
-            //echo '<h1>The compiler hook has run!';
+            //echo '<h1>The compiler hook has run!</h1>';
             //print_r($options); //Option values
             //print_r($css); // Compiler selector CSS values  compiler => array( CSS SELECTORS )
 
@@ -255,11 +256,19 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         )
                     ),
                     array(
+                        'id'        => 'section-media-checkbox',
+                        'type'      => 'switch',
+                        'title'     => __('Section Show', 'redux-framework-demo'),
+                        'subtitle'  => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
+
+                    ),
+                    array(
                         'id'        => 'section-media-start',
                         'type'      => 'section',
                         'title'     => __('Media Options', 'redux-framework-demo'),
                         'subtitle'  => __('With the "section" field you can create indent option sections.', 'redux-framework-demo'),
-                        'indent'    => true // Indent all options below until the next 'section' option is set.
+                        'indent'    => true, // Indent all options below until the next 'section' option is set.
+                        'required'  => array('section-media-checkbox', "=", 1),
                     ),
                     array(
                         'id'        => 'opt-media',
@@ -279,7 +288,8 @@ if (!class_exists('Redux_Framework_sample_config')) {
                     array(
                         'id'        => 'section-media-end',
                         'type'      => 'section',
-                        'indent'    => false // Indent all options below until the next 'section' option is set.
+                        'indent'    => false, // Indent all options below until the next 'section' option is set.
+                        'required'  => array('section-media-checkbox', "=", 1),
                     ),
                     array(
                         'id'        => 'media-no-url',
@@ -375,13 +385,14 @@ if (!class_exists('Redux_Framework_sample_config')) {
                     ),
                     array(
                         'id'        => 'switch-off',
-                        'type'      => 'switch',
+                        'type'      => 'checkbox',
                         'title'     => __('Switch Off', 'redux-framework-demo'),
                         'subtitle'  => __('Look, it\'s on!', 'redux-framework-demo'),
+                        //'options' => array('on', 'off'),
                         'default'   => false,
                     ),
                     array(
-                        'id'        => 'switch-custom',
+                        'id'        => 'switch-parent',
                         'type'      => 'switch',
                         'title'     => __('Switch - Custom Titles', 'redux-framework-demo'),
                         'subtitle'  => __('Look, it\'s on! Also hidden child elements!', 'redux-framework-demo'),
@@ -390,19 +401,31 @@ if (!class_exists('Redux_Framework_sample_config')) {
                         'off'       => 'Disabled',
                     ),
                     array(
-                        'id'        => 'switch-fold',
+                        'id'        => 'switch-child1',
                         'type'      => 'switch',
-                        'required'  => array('switch-custom', '=', '1'),
+                        'required'  => array('switch-parent', '=', '1'),
                         'title'     => __('Switch - With Hidden Items (NESTED!)', 'redux-framework-demo'),
                         'subtitle'  => __('Also called a "fold" parent.', 'redux-framework-demo'),
                         'desc'      => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework-demo'),
                         'default'   => false,
                     ),
                     array(
+                        'id'        => 'switch-child2',
+                        'type'      => 'switch',
+                        'required'  => array('switch-parent', '=', '1'),
+                        'title'     => __('Switch2 - With Hidden Items (NESTED!)', 'redux-framework-demo'),
+                        'subtitle'  => __('Also called a "fold" parent.', 'redux-framework-demo'),
+                        'desc'      => __('Items set with a fold to this ID will hide unless this is set to the appropriate value.', 'redux-framework-demo'),
+                        'default'   => false,
+                    ),                    
+                    array(
                         'id'        => 'opt-patterns',
                         'type'      => 'image_select',
                         'tiles'     => true,
-                        'required'  => array('switch-fold', 'equals', '0'),
+                        'required'  => array(
+                                            array('switch-child2', 'equals', 1),
+                                            array('switch-off', 'equals', 1),
+                                       ),
                         'title'     => __('Images Option (with pattern=>true)', 'redux-framework-demo'),
                         'subtitle'  => __('Select a background pattern.', 'redux-framework-demo'),
                         'default'   => 0,
@@ -502,7 +525,6 @@ if (!class_exists('Redux_Framework_sample_config')) {
                             'google'        => true,
                             'font-size'     => '33px',
                             'line-height'   => '40px'),
-                        'preview' => array('text' => 'ooga booga'),
                     ),
                 ),
             );

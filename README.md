@@ -74,6 +74,148 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.1.9.43 =
+* Added:      Import hook, just because we can.  :)
+
+= 3.1.9.42 =
+* Fixed:      Customizer now TRULY outputting CSS if output_tag is set to false.
+
+= 3.1.9.41 =
+* Fixed:      Reset section, etc. Discovered an odd WordPress thing.
+
+= 3.1.9.40 =
+* Fixed:      Image_select size override.
+* Fixed:      Customizer save not firing the compiler hook.
+* Fixed:      Customizer not outputting CSS if output_tag is set to false.
+* Fixed:      Small empty variable check. Undefined index in the defaults generating function.
+
+= 3.1.9.39 =
+* Fixed:      WP 3.9 update made editor field button look ugly.
+* Fixed:      Save hook not firing when save_default set to false.
+
+= 3.1.9.38 =
+* Fixed:      Reset section anomalies.  Maybe.
+
+= 3.1.9.37 =
+* Fixed:      Array of values in required not recognized.
+
+= 3.1.9.36 =
+* Fixed:      Updated hint defaults to prevent index warning.
+
+= 3.1.9.35 =
+* Fixed:      Removed leftover debug code.
+
+= 3.1.9.34 =
+* Added:      New readonly argument for text field.
+
+= 3.1.9.33 =
+* Fixed:      Reset/Reset section actions hooks now fire properly.
+
+= 3.1.9.32 =
+* Fixed:      When developer uses section field but does not specify an indent argument.
+
+= 3.1.9.31 =
+* Fixed:      Dynamic URL for slides
+* Fixed:      Accidently removed reset action on section reset. Restored.
+
+= 3.1.9.30 =
+* Fixed:      Section defaults bug for certain field types.
+
+= 3.1.9.29 =
+* Fixed:      Dynamic URL if site URL changed now updates media properly if attachement exists.
+
+= 3.1.9.28 =
+* Fixed:      Customizer now correctly does live preview.
+
+= 3.1.9.27 =
+* Fixed:      Special enqueue case fix.
+
+= 3.1.9.26 =
+* Added:      A few more hooks for defaults and options.
+* Fixed:      Small undefined index error.
+* Added:      Section key generation via title.
+* Modified:   File intending.
+
+= 3.1.9.25 =
+* Fixed:      Custom menus not displaying options panel.
+
+= 3.1.9.24 =
+* Fixed:      Single checkbox option not retaining checked value.
+* Fixed:      Border field returning bad CSS in CSS compiler.
+
+= 3.1.9.23 =
+* Fixed:      Import/Export fix.  Thanks, CGlingener!
+
+= 3.1.9.22 =
+* Added:      Save warning now is sticky to the top and responsive.
+* Fixed:      Mobile fixes for Redux. Looks great on small screens how.
+* Fixed:      Slight CSS fixes.
+* Fixed:      Compiler fixes and added notices.
+* Added:      Import/Export more reasonable text.
+
+= 3.1.9.21 =
+* Added:      `force_output` are on the field level to bypass the required check that removes the output if the field is hidden. Thanks @rffaguiar.
+
+= 3.1.9.20 =
+* Fixed:      Rare case (mediatemple grid server) when file_get_contents won't work outside of the uploads dir. Used curl to grab the font HTML.  ;)
+
+= 3.1.9.19 =
+* Fixed:      Undefined index for admin bar.
+
+= 3.1.9.18 =
+* Fixed:      SMALL issue with WordPress 3.9. Now it works.  ;)
+
+= 3.1.9.17 =
+* Fixed:      Info and divide field now work with required.
+
+= 3.1.9.16 =
+* Added:      Fallback. Now if the media, slides, or background URL doesn't match the site URL, but the attachment ID is present, the data is updated.
+
+= 3.1.9.15 =
+* Fixed:      Last tab not properly set.  Slow rendering.
+
+= 3.1.9.14 =
+* Modified:   Replaced transients with cookies.
+
+= 3.1.9.13 =
+* Fixed:      Undefined variable issues for new required methods.
+
+= 3.1.9.12 =
+* Fixed:      Default_show display error with a non-array being steralized.
+* Added:      Multiple required parent value checking! Booya!
+* Fixed:      Sections now fold with required.
+
+= 3.1.9.11 =
+* Fixed:      select2 not rendering properly when dev_mode = false, because of ace_editor fix.
+* Fixed:      Removed mistakenly compiled test code from redux.js.
+
+= 3.1.9.10 =
+* Fixed:      ace_editor not rendering properly in certain instances.
+* Modified:   Small change to import_export field in checking for existing instance of itself.
+
+= 3.1.9.9 =
+* Fixed:      import_export not rendering when the menutype argument was set to menu
+
+= 3.1.9.8 =
+* Fixed:      Ace_editor not enqueued unless used. MEMORY HOG.
+
+= 3.1.9.7 =
+* Fixed:      Color_Gradient transparency to was being auto-selected if from way transparent.
+* Fixed:	  Enqueue select with slider for local dev.
+
+= 3.1.9.6 =
+* Modified:   removed add_submenu_page when creating a submenu for us in the WP admin area.  WP approved API is used in it's place to being Redux up to wp.org theme check standards.
+
+= 3.1.9.5 =
+* Fixed:      Massive speed issue with button_set. Resolved.
+* Fixed:      Issue where default values throws an error if ID is not set.
+
+= 3.1.9.4 =
+* Fixed:      Continuing effort to ensure proper loading of config from child themes.
+
+= 3.1.9.3 =
+* Fixed:      Import/Export array search bug if section['fields'] is not defined.
+
 = 3.1.9.2 =
 * Fixed:      Inconsistencies in import/export across different versions of PHP.
 

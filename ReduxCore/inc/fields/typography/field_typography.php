@@ -215,6 +215,18 @@ class ReduxFramework_typography {
                     echo $this->parent->googleFontHTML;
                 } else if (file_exists(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html')) {
                     $googleHTML = $wp_filesystem->get_contents(ReduxFramework::$_dir . 'inc/fields/typography/googlefonts.html');
+                    // Fallback if file_get_contents won't work for wordpress. MEDIATEMPLE
+                    if (empty($googleHTML)) {
+                        $url = ReduxFramework::$_url . 'inc/fields/typography/googlefonts.html';
+                        $ch = curl_init();
+                        curl_setopt($ch, CURLOPT_URL, $url);
+                        curl_setopt($ch, CURLOPT_RETURNTRANSFER, 1);
+                        $googleHTML = curl_exec($ch);
+                        curl_close($ch);
+                        if (empty($googleHTML)) {
+                            $googleHTML = false;
+                        }
+                    }
                     $this->parent->googleFontHTML = $googleHTML;
                     echo $googleHTML;
                 }
@@ -419,7 +431,7 @@ class ReduxFramework_typography {
             if (isset($this->field['preview']['text'])) {
                 $g_text = $this->field['preview']['text'];
             } else {
-                $g_text = '1 2 3 4 5 6 7 8 9 0  A B C D E F G H I J K L M N O P Q R S T U V W X Y Z  a b c d e f g h i j k l m n o p q r s t u v w x y z';
+                $g_text = '1 2 3 4 5 6 7 8 9 0 A B C D E F G H I J K L M N O P Q R S T U V W X Y Z a b c d e f g h i j k l m n o p q r s t u v w x y z';
             }
             if (isset($this->field['preview']['font-size'])) {
                 $g_size = 'style="font-size: ' . $this->field['preview']['font-size'] . ';"';

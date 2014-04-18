@@ -4,7 +4,7 @@
 if( !defined( 'ABSPATH' ) ) exit;
 
 // Don't duplicate me!
-if( !class_exists( 'ReduxFramework' ) ) {
+if( !class_exists( 'Redux_Helpers' ) ) {
 
     /**
      * Redux Helpers Class
@@ -15,15 +15,41 @@ if( !class_exists( 'ReduxFramework' ) ) {
      */
     class Redux_Helpers {
 
-        public static function isParentTheme() {
-            if (strpos(self::cleanFilePath(__FILE__), self::cleanFilePath(get_template_directory())) !== false) {
+        public static function isFieldInUse($parent, $field) {
+          foreach( $parent->sections as $k => $section ) {
+                if ( !isset( $section['title'] ) ){
+                    continue;
+                }    
+                
+                if ( isset( $section['fields'] ) && !empty( $section['fields'] ) ) {
+                    if ( Redux_Helpers::recursive_array_search($field, $section['fields'])) {
+                        return true;
+                        continue;
+                    }
+                }                
+            }            
+        }
+        
+        public static function isParentTheme($file) {
+            if (strpos(self::cleanFilePath($file), self::cleanFilePath(get_template_directory())) !== false) {
                 return true;
             }            
             return false;
         }
         
-        public static function isChildTheme() {
-            if (strpos(self::cleanFilePath(__FILE__), self::cleanFilePath(get_stylesheet_directory())) !== false) {
+        public static function isChildTheme($file) {
+            if (strpos(self::cleanFilePath($file), self::cleanFilePath(get_stylesheet_directory())) !== false) {
+                return true;
+            }
+            return false;
+        }
+
+        private static function reduxAsPlugin() {
+            return ReduxFramework::$_as_plugin;
+        }
+        
+        public static function isTheme ($file) {
+            if (true == self::isChildTheme($file) || true == self::isParentTheme($file)) {
                 return true;
             }
             return false;
@@ -71,46 +97,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
          *
          * Takes the color hex value and converts to a rgba.
          *
-         * @since ReduxFramework 3.0.4
-         * @author @mekshq, http://mekshq.com/how-to-convert-hexadecimal-color-code-to-rgb-or-rgba-using-php/
-        */
-//        public static function hex2rgba($color, $opacity = false) {
-//
-//            $default = 'rgb(0,0,0)';
-//
-//            //Return default if no color provided
-//            if(empty($color))
-//                  return $default; 
-//
-//            //Sanitize $color if "#" is provided 
-//                if ($color[0] == '#' ) {
-//                    $color = substr( $color, 1 );
-//                }
-//
-//                //Check if color has 6 or 3 characters and get values
-//                if (strlen($color) == 6) {
-//                        $hex = array( $color[0] . $color[1], $color[2] . $color[3], $color[4] . $color[5] );
-//                } elseif ( strlen( $color ) == 3 ) {
-//                        $hex = array( $color[0] . $color[0], $color[1] . $color[1], $color[2] . $color[2] );
-//                } else {
-//                        return $default;
-//                }
-//
-//                //Convert hexadec to rgb
-//                $rgb =  array_map('hexdec', $hex);
-//
-//                //Check if opacity is set(rgba or rgb)
-//                if($opacity){
-//                    if(abs($opacity) > 1)
-//                        $opacity = 1.0;
-//                    $output = 'rgba('.implode(",",$rgb).','.$opacity.')';
-//                } else {
-//                    $output = 'rgb('.implode(",",$rgb).')';
-//                }
-//
-//                //Return rgb(a) color string
-//                return $output;
-//        }
+         * @since ReduxFramework 3.0.4 
+         */
         public static function hex2rgba($hex) {
             $hex = str_replace("#", "", $hex);
             if(strlen($hex) == 3) {

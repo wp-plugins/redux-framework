@@ -22,7 +22,7 @@ https://github.com/ReduxFramework/ReduxFramework/wiki/translate
 
 ## Getting Started with Redux ##
 
-ReduxFramework has been built from the groud up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same WordPress instance. For a guide on getting started please refer to [https://github.com/ReduxFramework/redux-framework/wiki/Getting-Started](https://github.com/ReduxFramework/redux-framework/wiki/Getting-Started).
+ReduxFramework has been built from the ground up to be the most flexible framework around. You can run it as an auto-updating plugin, or embed it inside your plugin or theme. It allows for multiple copies of itself within the same WordPress instance. For a guide on getting started please refer to [https://github.com/ReduxFramework/redux-framework/wiki/Getting-Started](https://github.com/ReduxFramework/redux-framework/wiki/Getting-Started).
 
 You can also [download our sample theme available here](https://github.com/ReduxFramework/ReduxSampleTheme) to start developing right away.
 
@@ -73,6 +73,13 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ## Changelog ##
 
 ### Master ###
+
+= 3.2.2.2 =
+* Fixed:      Info field didn't intend within section.
+
+= 3.2.2.1 =
+* Fixed:      Compiler hook wasn't running.
+
 
 = 3.1.9.44 =
 * Fixed:      Small bug in image_select javascript.

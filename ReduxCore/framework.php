@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.1
+ * @version     3.2.2
  */
 
 // Exit if accessed directly
@@ -60,7 +60,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.1';
+        public static $_version = '3.2.2';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -1244,7 +1244,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     if( !isset( $section['type'] ) || $section['type'] != 'divide' ) {
 
                         foreach( $this->sections as $k => $section ) {
-                            if ( !isset( $section['title'] ) ){
+                            if ( !isset( $section['title'] ) || ( isset( $section['subsection'] ) && $section['subsection'] == true ) ) {
                                 continue;
                             }
 
@@ -2113,7 +2113,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     }
                 }
                 add_settings_section( $this->args['opt_name'] . $k . '_section', $heading, array( &$this, '_section_desc' ), $this->args['opt_name'] . $k . '_section_group' );
-
+                $sectionIndent = false;
                 if( isset( $section['fields'] ) ) {
                     foreach( $section['fields'] as $fieldk => $field ) {
                         if ( !isset( $field['type'] ) ) {
@@ -2148,6 +2148,16 @@ if( !class_exists( 'ReduxFramework' ) ) {
                             continue;
                         }
 
+                        if ( isset( $field['type'] ) && $field['type'] == "section" ) {
+                            if ( isset( $field['indent'] ) && $field['indent'] == true ) {
+                                $sectionIndent = true;
+                            } else {
+                                $sectionIndent = false;
+                            }
+                        }
+                        if ( isset( $field['type'] ) && $field['type'] == "info" && $sectionIndent ) {
+                            $field['sectionIndent'] = $sectionIndent;
+                        }
                         $th = $this->get_header_html( $field );
 
                         $field['name'] = $this->args['opt_name'] . '[' . $field['id'] . ']';
@@ -2479,8 +2489,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 		        }
 
 		        if (isset($compiler)) {
-			        $this->run_compiler = true;
-			        //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
+			        //$this->run_compiler = true;
+			        setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
 			        $plugin_options['REDUX_COMPILER'] = time();
 		        }
 	            $this->saved = "defaults_section";
@@ -2514,8 +2524,8 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if( !empty( $plugin_options['compiler'] ) ) {
                 $plugin_options['REDUX_COMPILER'] = time();
-                //setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
-	            $this->run_compiler = true;
+                setcookie('redux-compiler-' . $this->args['opt_name'], 1, time()+1000, '/');
+	            //$this->run_compiler = true;
             }
 
             unset( $plugin_options['defaults'], $plugin_options['defaults_section'], $plugin_options['import'], $plugin_options['import_code'], $plugin_options['import_link'], $plugin_options['compiler'], $plugin_options['redux-section'] );
@@ -2696,20 +2706,32 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             if (isset($section['type']) && $section['type'] == "divide") {
                 $string .= '<li class="divide">&nbsp;</li>';
-            } else {
+            } else if (!isset($section['subsection']) || $section['subsection'] != true ) {
                 // DOVY! REPLACE $k with $section['ID'] when used properly.
                 //$active = ( ( is_numeric($this->current_tab) && $this->current_tab == $k ) || ( !is_numeric($this->current_tab) && $this->current_tab === $k )  ) ? ' active' : '';
                 $string .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
                 $string .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $k.$suffix . '">' . $icon . '<span class="group_title">' . $section['title'] . '</span></a>';
-                if ( !empty( $section['sections'] ) ) {
-                    $string .= '<ul id="' . $k.$suffix . '_section_group_li_subsections" class="sub">';
-                    foreach ($section['sections'] as $k2 => $subsection) {
-                        $string .= '<li id="' . $k.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
-                        $string .= '<a href="javascript:void(0);" id="' . $k.$suffix . '_section_group_subsection_li_a" class="redux-group-tab-link-a" data-rel="' . $k.$suffix .'sub-'.$k2.'"><span class="group_title">' . $subsection['title'] . '</span></a>';
+                $nextK = $k;
+	            if ( isset( $this->sections[($k+1)] ) && isset($this->sections[($k+1)]['subsection']) && $this->sections[($k+1)]['subsection'] == true ) {
+                    $string .= '<ul id="' . $nextK.$suffix . '_section_group_li_subsections" class="subsection">';
+                }
+
+                $doLoop = true;
+                while ($doLoop) {
+                    $nextK += 1;
+                    if ( count($this->sections) < $nextK || !isset( $this->sections[$nextK] ) || !isset($this->sections[$nextK]['subsection']) || $this->sections[$nextK]['subsection'] != true ) {
+                        $doLoop = false;
+                    } else {  
+                        $string .= '<li id="' . $nextK.$suffix . '_section_group_li" class="redux-group-tab-link-li">';
+                        $string .= '<a href="javascript:void(0);" id="' . $nextK.$suffix . '_section_group_li_a" class="redux-group-tab-link-a" data-rel="' . $nextK.$suffix .'"><span class="group_title">' . $this->sections[$nextK]['title'] . '</span></a>';
                         $string .= '</li>';
                     }
+                }
+
+                if ( isset( $this->sections[($k+1)] ) && isset($this->sections[($k+1)]['subsection']) && $this->sections[($k+1)]['subsection'] == true ) {
                     $string .= '</ul>';
                 }
+
                 $string .- '</li>';
             }
             return $string;

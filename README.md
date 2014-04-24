@@ -74,10 +74,67 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.2.17 =
+* Fixed:      Responsive issues with spacing and dimension fields.
+
+= 3.2.2.16 =
+* Fixed:      Style conflicts with WP 3.9. Added register filter to fields via id.
+
+= 3.2.2.15 =
+* Fixed:      Metaboxes issues.
+
+= 3.2.2.14 =
+* Modified:   Some admin panel stylings. Now perfect with mobile hover. Also fixed an issue
+              with the slidedown width for sections. No more 2 empty pixels.
+
+= 3.2.2.13 =
+* Added:      Tick mark if section has sub sections. Hidden when subsections expanded.
+
+= 3.2.2.12 =
+* Fixed:      Compiler hook in the customizer now passes the CSS.
+
+= 3.2.2.11 =
+* Fixed:      Compiler hook now properly fires in the customizer.
+
+= 3.2.2.10 =
+* Fixed:      Validation error with headers already being set.
+
+= 3.2.2.9 =
+* Fixed:      Added mode for width/height to override dimensions css output.
+
+= 3.2.2.8 =
+* Fixed:      Restoring lost formatting from multiple merges.
+
+= 3.2.2.7 =
+* Fixed:      New sorter default values get set properly now.  ;)
+
+= 3.2.2.6 =
+* Added:      `data` and `args` can now be set to sorter! Just make sure to have it be a key based on what
+              you want it to display as. IE: `array('Main'=>'sidebars')`
+
+= 3.2.2.5 =
+* Added:      Prevent Redux from firing on AJAX heartbeat, but added hook for it 'redux/ajax/heartbeat'.
+* Fixed:      Removed erroneous 's' character from HTML.
+
+= 3.2.2.4 =
+* Added:	  Check to make sure a field isn't empty after the filter. If it is empty, skip over it.
+
+= 3.2.2.3 =
+* Added:	  Subsections now show icon if they have it. Show text only (without indent) if they do not.
+
 = 3.2.2.2 =
-* Fixed:      Info field didn't intend within section.
+* Added:	  Set a section or field argument of `'panel' => false` to skip over that field or panel and
+              hide it. It will still be registered with defaults saved, but not display. This can be useful
+              for things like the customizer.
 
 = 3.2.2.1 =
+* Added:	  SUBSECTIONS! Just add `'subsection' => true` to any section that isn't a divide/callback and
+              isn't the first section in your panel.  ;)
+
+= 3.2.1.2 =
+* Fixed:      Info field didn't intend within section.
+
+= 3.2.1.1 =
 * Fixed:      Compiler hook wasn't running.
 
 
@@ -164,10 +221,12 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Added:      Import/Export more reasonable text.
 
 = 3.1.9.21 =
-* Added:      `force_output` are on the field level to bypass the required check that removes the output if the field is hidden. Thanks @rffaguiar.
+* Added:      `force_output` are on the field level to bypass the required check that removes the output
+              if the field is hidden. Thanks @rffaguiar.
 
 = 3.1.9.20 =
-* Fixed:      Rare case (mediatemple grid server) when file_get_contents won't work outside of the uploads dir. Used curl to grab the font HTML.  ;)
+* Fixed:      Rare case (mediatemple grid server) when file_get_contents won't work outside of the
+              uploads dir. Used curl to grab the font HTML.  ;)
 
 = 3.1.9.19 =
 * Fixed:      Undefined index for admin bar.
@@ -179,7 +238,8 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Fixed:      Info and divide field now work with required.
 
 = 3.1.9.16 =
-* Added:      Fallback. Now if the media, slides, or background URL doesn't match the site URL, but the attachment ID is present, the data is updated.
+* Added:      Fallback. Now if the media, slides, or background URL doesn't match the site URL, but the
+              attachment ID is present, the data is updated.
 
 = 3.1.9.15 =
 * Fixed:      Last tab not properly set.  Slow rendering.
@@ -214,7 +274,8 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Fixed:	  Enqueue select with slider for local dev.
 
 = 3.1.9.6 =
-* Modified:   removed add_submenu_page when creating a submenu for us in the WP admin area.  WP approved API is used in it's place to being Redux up to wp.org theme check standards.
+* Modified:   removed add_submenu_page when creating a submenu for us in the WP admin area.  WP
+              approved API is used in it's place to being Redux up to wp.org theme check standards.
 
 = 3.1.9.5 =
 * Fixed:      Massive speed issue with button_set. Resolved.
@@ -268,15 +329,17 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Modified:   Removed Google font CSS line from header (because it's in the footer via wp_enqueue_style.
 
 = 3.1.8.15 =
-* Added:      Admin notice for new builds of Redux on Github as they become available.  This feature is available on in dev_mode, and may be turned off by setting the `update_notice` argument to false.  See the Arguments page of the wiki for more details.
+* Added:      Admin notice for new builds of Redux on Github as they become available.  This feature is
+              available on in dev_mode, and may be turned off by setting the `update_notice` argument to
+              false.  See the Arguments page of the wiki for more details.
 * Added:      text-transform option for the typography field.
 * Fixed:      image_select images not resizing properly in FF and IE.
-* Fixed:      Layout for the typography field, so everything isn't smushed together.  The new layout is as follows:
-
-              [family-font] [backup-font]
-              [style] [script] [align] [transform]
-              [size] [height] [word space] [letter space]
-              [color]
+* Fixed:      Layout for the typography field, so everything isn't smushed together.  The new layout is
+              as follows:
+                  [family-font] [backup-font]
+                  [style] [script] [align] [transform]
+                  [size] [height] [word space] [letter space]
+                  [color]
 
 = 3.1.8.14 =
 * Added:      Newsletter sign-up popup at first load of the Redux options panel.
@@ -289,7 +352,8 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Added:      Theme responsive for date picker.
 
 = 3.1.8.10 =
-* Added:      New slider.  Better looking UI, double handles and support for floating point values.  See the wiki for more info.
+* Added:      New slider.  Better looking UI, double handles and support for floating
+              point values.  See the wiki for more info.
 
 = 3.1.8.9 =
 * Fixed:      link_color field showing notice on default, if user enters no defaults.
@@ -309,14 +373,16 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 = 3.1.8.4 =
 * Added:      Support for using the divide field in folding.
-* Added:      Error trapping in typography.js for those still attempting to use typography with no font-family.
+* Added:      Error trapping in typography.js for those still attempting to use
+              typography with no font-family.
 
 = 3.1.8.3 =
 * Added:      Full asynchronous font loading.
 * 
 = 3.1.8.2 =
 * Added:      email_not_empty validation field.
-* Reverted:   email validation field only checks for valid email.  not_empty check moved to new validation field.
+* Reverted:   email validation field only checks for valid email.  not_empty check moved
+              to new validation field.
 
 = 3.1.8.1 =
 * Fixed:      Hide demo hook wasn't hiding demo links.
@@ -329,7 +395,8 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Fixed:    Background field now works with dynamic preview as it should.
 * Fixed:    Extension fields now enqueueing properly.
 * Added:    Text-align to typography field.
-* Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed embedded would not show options menu.
+* Fixed:    Servers returning forwards slashes in TEMPLATEPATH, while Redux is installed
+            embedded would not show options menu.
 * Fixed:    On and Off for switch field not displaying language translation.
 * Fixed:    email validation allowing a blank field.
 * Fixed:    Now allow for empty values as valid keys.
@@ -357,11 +424,14 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Added:    'read-only' option for media text field.
 * Added:    'mode' option to image_select, so CSS output element may be specified.
 * Added:    Admin Bar menu for option panel.
-* Modified: Removed raw_align field and added align option to raw field.  See wiki for more info.
+* Modified: Removed raw_align field and added align option to raw field.
+            See wiki for more info.
 * Modified: media field 'read-only' to 'readonly' to vonform to HTML standards.
-* Removed:  EDD extension. It never belonged in Core and will be re-released as a downloadable extension shortly
+* Removed:  EDD extension. It never belonged in Core and will be re-released as a
+            downloadable extension shortly
 * Removed:  Group field, temporarily.
-* Removed:  wp_get_current_user check.  See https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
+* Removed:  wp_get_current_user check.  See
+            https://github.com/ReduxFramework/ReduxFramework/wiki/How-to-fix-%22Fatal-error%3A-Call-to-undefined-function-wp_get_current_user%28%29-%22
  
 = 3.1.5 =
 * Typography font arrays may not contain comma spaces.
@@ -407,9 +477,11 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 * Fixed Image_select - Various small bugs.
 * Fixed Slides - Various small bugs.
 * Fixed Sortable - Using native jQuery UI library same as within WordPress.
-* Fixed Slider and Spinner Input Field - Values now move to the closest valid value in regards to the step, automatically.
+* Fixed Slider and Spinner Input Field - Values now move to the closest valid
+  value in regards to the step, automatically.
 * Fixed Ace Editor
-* FEATURE - All CSS/JS files are compiled into a single file now! Speed improvements for the backend. 
+* FEATURE - All CSS/JS files are compiled into a single file now! Speed
+  improvements for the backend.
 * Fix in how WordPress data is received, improved some output.
 * Fix for various fields not triggering fold/compiler/save.
 * Fixed elusive icons to use the new version and classes.

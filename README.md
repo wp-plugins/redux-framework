@@ -74,6 +74,31 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.4 =
+* Fixed:      Unload error on first load if the typography defaults are not set.
+
+= 3.2.3.5 =
+* Modified:   Moved update check functions to class file and out of the core.
+* Fixed:      Errors pertaining to mod_rewrite check.
+
+= 3.2.3.4 =
+* Fixed:      All those headers already set errors.
+
+= 3.2.3.3 =
+* Added:      $changed_values variable to save hooks denoting the old values on a save.
+* Added:      Pointers to Extensions on load.
+* Modified:   CSS Output for the background field.
+
+= 3.2.3.2 =
+* Fixed:      Validation error messages not appearing on save.
+* Modified:   Speed boost on validation types.
+* Added:      Apache mod_rewrite check.  This should solve many issues we've been seeing regarding mod_rewrite noe being enabled.
+
+= 3.2.3.1 =
+* Fixed:      Sortable field not saving properly.
+* Fixed:      Erroneous data in admin.less
+* Updated:    sample-config.php.  Sortable checkbox field example now uses true/false instead of text meant for textbox example.
+
 = 3.2.3 =
 * Fixed:      Responsive issues with spacing and dimension fields.
 

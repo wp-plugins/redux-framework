@@ -17,7 +17,7 @@
  * @package     Redux_Framework
  * @subpackage  Core
  * @author      Redux Framework Team
- * @version     3.2.4
+ * @version     3.2.5
  */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         // ATTENTION DEVS
         // Please update the build number with each push, no matter how small.
         // This will make for easier support when we ask users what version they are using.
-        public static $_version = '3.2.4';
+        public static $_version = '3.2.5';
         public static $_dir;
         public static $_url;
         public static $wp_content_url;
@@ -488,7 +488,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
                     // Deprecated
                     $GLOBALS[ $this->args['global_variable'] ]['REDUX_COMPILER'] = $this->transients['last_compiler'];
                     // Last compiler hook key
-                    $GLOBALS[ $this->args['REDUX_LAST_COMPILER'] ]['REDUX_COMPILER'] = $this->transients['last_compiler'];
+                    $GLOBALS[ $this->args['global_variable'] ]['REDUX_LAST_COMPILER'] = $this->transients['last_compiler'];
                 }
                 return true;
             }
@@ -2227,7 +2227,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
              */
             do_action( "redux/options/{$this->args['opt_name']}/register", $this->sections);
 
-            if ( $runUpdate && !isset( $this->parent->never_save_to_db ) ) { // Always update the DB with new fields
+            if ( $runUpdate && !isset( $this->never_save_to_db ) ) { // Always update the DB with new fields
                 $this->set_options( $this->options );
             }
 
@@ -2347,7 +2347,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
         public function _validate_options( $plugin_options ) {
 
             if ( $plugin_options == $this->options ) {
-                return;
+                return $plugin_options;
             }
 
             $time = time();
@@ -2467,7 +2467,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                 $this->transients['changed_values'] = array();
                 foreach($this->options as $key => $value) {
-                    if ($value != $plugin_options[$key]) {
+                    if (isset($plugin_options[$key]) && $value != $plugin_options[$key]) {
                         $this->transients['changed_values'][$key] = $value;
                     }
                 }
@@ -2519,7 +2519,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
             $this->transients['changed_values'] = array(); // Changed values since last save
             foreach($this->options as $key => $value) {
-                if ($value != $plugin_options[$key]) {
+                if (isset($plugin_options[$key]) && $value != $plugin_options[$key]) {
                     $this->transients['changed_values'][$key] = $value;
                 }
             }
@@ -2592,9 +2592,9 @@ if( !class_exists( 'ReduxFramework' ) ) {
 
                         if( isset( $field['validate'] ) ) {
                             // Shim for deleted validation field
-                            if ($field['validate'] == "colorrgba") {
-                                $field['validate'] = "color_rgba";
-                            }
+                            //if ($field['validate'] == "colorrgba") {
+//                                $field['validate'] = "color_rgba";
+  //                          }
                             $validate = 'Redux_Validation_' . $field['validate'];
 
                             if( !class_exists( $validate ) ) {
@@ -2825,10 +2825,7 @@ if( !class_exists( 'ReduxFramework' ) ) {
             settings_fields( "{$this->args['opt_name']}_group" );
 
             // Last tab?
-            if( empty( $this->options['last_tab'] ) )
-                $this->options['last_tab'] = '';
-
-            $this->options['last_tab'] = ( isset( $_GET['tab'] ) && !isset( $this->transients['last_save_mode'] ) ) ? $_GET['tab'] : $this->options['last_tab'];
+            $this->options['last_tab'] = ( isset( $_GET['tab'] ) && !isset( $this->transients['last_save_mode'] ) ) ? $_GET['tab'] : '';
 
             echo '<input type="hidden" id="last_tab" name="' . $this->args['opt_name'] . '[last_tab]" value="' . $this->options['last_tab'] . '" />';
 

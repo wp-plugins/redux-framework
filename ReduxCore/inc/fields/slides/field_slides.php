@@ -70,14 +70,16 @@ if (!class_exists('ReduxFramework_slides')) {
                     'url'           => true,
                 )
             );
-
+            
+            $this->field = wp_parse_args($this->field, $defaults);
+            
             echo '<div class="redux-slides-accordion">';
 
             $x = 0;
 
             $multi = (isset($this->field['multi']) && $this->field['multi']) ? ' multiple="multiple"' : "";
 
-            if (isset($this->value) && is_array($this->value)) {
+            if (isset($this->value) && is_array($this->value) && !empty($this->value)) {
 
                 $slides = $this->value;
 

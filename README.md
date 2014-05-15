@@ -74,6 +74,87 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.8.21 =
+* Added:      Network admin support! Set argument 'database' to network and data will be saved site-wide. Also two new arguments: network_admin & network_sites for where to show the panel.
+
+= 3.2.8.20 =
+* Fixed:      Redux now ignores any directories that begin with `.` in the extension folder.  See #1213.
+
+= 3.2.8.19 =
+* Fixed:      Redux not saving when validating uploads.
+* Modified:   Dimension field default now accepts either `units` or `unit`.
+
+= 3.2.8.18 =
+* Fixed:      Border field output/compiler formatting.  Removed 'inherit' in place of default values.  See #1208.
+* Fixed:      Trim() warning in framework.php when saving.  See #1209, #1201.
+
+= 3.2.8.17 =
+* Fixed:      Typography not outputting all styles when `all_styles` set to true.
+
+= 3.2.8.16 =
+* Added:      `output` argument for `color` and `color_rgba` fields accepts key/pairs for different modes.  Example:
+```
+              'output' => array('color' => '.site-title, .site-header', 'background-color' => '.site-background')
+```
+
+= 3.2.8.15 =
+* Added:      Customizer hook that can be used to simulate the customizer for live preview in the customizer. `redux/customizer/live_preview`
+
+= 3.2.8.14 =
+* Fixed:      'Cannot send header' issues with typography.
+* Modified:   Google CSS moved into HEAD via WP enqueue.
+
+= 3.2.8.13 =
+* Added:      `class` argument to the Redux Arguments, section array, and metabox array. If set, a class will be appended to whichever level is used. This allows further customization for our users.
+
+= 3.2.8.12 =
+* Fixed:      Small fix for validation if subsection parent is free of errors, remove the red highlight when not expanded.
+* Fixed:      Small CSS classes for flashing fonts where web-font-loader.
+* Fixed:      ASync Flash on fonts. FINALLY. What a pain.
+* Modified:   Now do a trim on all fields before validating. No need to alert because of a space...
+
+= 3.2.8.11 =
+* Modified:   Typography field CSS completely rewritten. All thanks to @eplanetdesign!
+* Modified:   Validation now works in metaboxes as well as updates numbers as changes occur. Validation for subsections is SO hot now.
+* Modified:   Various CSS fixes and improvements.
+* Fixed:      3+ JavaScript errors found in the background field. Now works flawlessly.
+* Added:      disable_save_warn flags to the arguments to disable the "you should save" slidedown.
+
+= 3.2.8.10 =
+* Fixed:      PHP warnings in background field.  #1173.  Thanks, @abossola.
+* Fixed:      CSS validation not respecting child selector symbol. #1162
+
+= 3.2.8.9 =
+* Modified:   Turned of mod_rewrite check.
+
+= 3.2.8.8 =
+* Modified:   How errors are displayed, no longer dependent on the ID, now proper classes.
+* Fixed:      Extra check for typography bug.
+* Fixed:      Error css alignment issue with subsections.
+* Modified:   Error notice stays until all errors are gone. Also updates it's number as errors fixed!
+
+= 3.2.8.7 =
+* Modified:   Moved google font files to proprietary folder in upload to help with permission issues.
+
+= 3.2.8.6 =
+* Fixed:      javascript error in typography field.
+
+= 3.2.8.5 =
+* Fixed:      Added a title to the google fonts stylesheet to fix validation errors.
+
+= 3.2.8.4 =
+* Fixed:      One more slides field error check, and an extra JS goodie for an extension.
+
+= 3.2.8.3 =
+* Fixed:      Leftover debug code messing up slides field.
+
+= 3.2.8.2 =
+* Fixed:      More reliable saved action hook.
+* Added:      Actions hooks for errors and warnings.
+
+= 3.2.8.1 =
+* Fixed:      Removed erroneous debug output in link_color field.
+
 = 3.2.7.3 =
 * Added:      is_empty / empty / !isset    AND    not_empty / !empty / isset as required operations
 

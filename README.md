@@ -74,6 +74,50 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.2.9.13 =
+* Fixed:      #1255 - button_set multi field not saving when all buttons not selected.
+
+= 3.2.9.12 =
+* Fixed:      #1254 - Border field with 0px not outputting properly.
+* Fixed:      #1250 - Typography preview font-size not set in preview.
+* Fixed:      #1247 - Spacing field not outputting properly in `absolute` mode.
+* Modified:   Typography previewing hidden until font inputs are changed.
+
+= 3.2.9.11 =
+* Fixed:      Vendor js not loading properly when dev_mode = true
+* Fixed:      Border field not outputting properly.
+
+= 3.2.9.10 =
+* Modified:   Centralized import/export code in anticipation of new builder features.
+* Fixed:      Removed rogue echo statement.
+
+= 3.2.9.9 =
+* Modified:   select2 loads only when a field requires it.
+
+= 3.2.9.8 =
+* Modified:   More code to load JS on demand for fields require it.
+
+= 3.2.9.7 =
+* Modified:   Field specific JS only loads with active field.
+* Fixed:      Hints stopped working due to classname change.
+
+= 3.2.9.6 =
+* Fixed:      Permissions argument on section array not filtering out raw field.
+
+= 3.2.9.5 =
+* Fixed:      Too many CSS tweaks to list, due to last build.
+* Fixed:      Sortable and Sorter fields now sort without page scroll when page size is under 782px.
+* Fixed:      Hint icon defaults to left position when screen size is under 782px.
+* Fixed:      `permissions` argument for fields and sections erasing saved field data.  See #1231
+
+= 3.2.9.4 =
+* Modified:   Woohoo! Nearly fully responsive. Yanked out all SMOF and NHP field customizations. Lots of little fixes on all browser screens. This will also greatly benefit Metaboxes and other areas of Redux.
+* Fixed:      In dev_mode panel CSS was being loaded 2x.
+
+= 3.2.9.3 =
+* Fixed:      Typography color picker bleeding under other elements.  #1225
+* Fixed:      Hint icon_color index error from builder.  #1222
+
 = 3.2.9.2 =
 * Fixed:      Tracking. It was... odd. Also started our support hooks, UI to come.
 * Fixed:      Now import/export supports multiple instances. I can't believe this has been this way for so long.

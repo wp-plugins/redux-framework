@@ -485,11 +485,13 @@ class ReduxFramework_typography {
             
             if (isset($this->field['preview']['font-size'])) {
                 $g_size = 'style="font-size: ' . $this->field['preview']['font-size'] . ';"';
+                $inUse = '1';
             } else {
                 $g_size = '';
+                $inUse = '0';
             }
 
-            echo '<p class="clear ' . $this->field['id'] . '_previewer typography-preview" ' . $g_size . '>' . $g_text . '</p>';
+            echo '<p data-preview-size="' . $inUse . '" class="clear ' . $this->field['id'] . '_previewer typography-preview" ' . $g_size . '>' . $g_text . '</p>';
             echo '</div>'; // end typography container
         }
     }  //function
@@ -504,8 +506,9 @@ class ReduxFramework_typography {
     function enqueue() {
 
         wp_enqueue_script(
-            'redux-field-color-js', ReduxFramework::$_url . 'inc/fields/color/field_color.js',
-            array( 'jquery', 'wp-color-picker' ),
+            'redux-field-color-js',
+            ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . Redux_Functions::isMin() . '.js',
+            array('jquery', 'wp-color-picker'),
             time(),
             true
         );
@@ -518,7 +521,7 @@ class ReduxFramework_typography {
         );
 
         wp_enqueue_script(
-            'redux-field-typography-js', ReduxFramework::$_url . 'inc/fields/typography/field_typography.js',
+            'redux-field-typography-js', ReduxFramework::$_url . 'inc/fields/typography/field_typography' . Redux_Functions::isMin() . '.js',
             array( 'jquery', 'wp-color-picker', 'redux-field-color-js', 'select2-js' ),
             time(),
             true

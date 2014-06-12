@@ -39,7 +39,7 @@ ReduxFramework has just released to the WordPress Plugins directory. Please spre
 
 If you can, please donate to help support the ongoing development of Redux Framework!
 
-[![Donate to the framework](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif "Donate to the framework")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=N5AD7TSH8YA5U)
+[![Donate to the framework](https://www.paypalobjects.com/en_US/i/btn/btn_donateCC_LG.gif "Donate to the framework")](https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_id=MMFMHWUPKHKPW)
 
 ## Features ##
 
@@ -77,6 +77,9 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 ## Changelog ##
 
 ### Master ###
+
+= 3.3.1.1 =
+* Fixed:      Slides field was not properly initialized for the media elements. Fixed.
 
 = 3.3.0.6 =
 * Fixed:      #1337 - `redux` JS dependency loading issue.  Many thanks @tpaksu

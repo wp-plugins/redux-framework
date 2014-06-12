@@ -475,7 +475,7 @@ if (!class_exists('ReduxFramework_typography')) {
                 $style = '';
                 if (isset($this->field['preview']['always_display'])) {
                     if (true === filter_var( $this->field['preview']['always_display'], FILTER_VALIDATE_BOOLEAN )) {
-                        $style = 'display: block;';
+                        $style = 'display: block; font-family: ' . $this->value['font-family'] . ';';
                     }
                 }
                 
@@ -504,7 +504,7 @@ if (!class_exists('ReduxFramework_typography')) {
             wp_enqueue_script(
                 'redux-field-color-js',
                 ReduxFramework::$_url . 'assets/js/color-picker/color-picker' . Redux_Functions::isMin() . '.js',
-                array('jquery', 'select2-js', 'wp-color-picker'),
+                array('jquery', 'select2-js', 'wp-color-picker', 'redux-js'),
                 time(),
                 true
             );

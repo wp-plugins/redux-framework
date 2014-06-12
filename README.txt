@@ -4,7 +4,7 @@ Donate link: https://www.paypal.com/cgi-bin/webscr?cmd=_s-xclick&hosted_button_i
 Tags: admin, admin interface, options, theme options, plugin options, options framework, settings, web fonts, google fonts
 Requires at least: 3.5.1
 Tested up to: 3.9.1
-Stable tag: 3.3.0.1
+Stable tag: 3.3.1
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -124,6 +124,18 @@ That's because the real FAQ section is on our site! Please visit [http://docs.re
 1. This is the demo mode of Redux Framework. Activate it and you will find a fully-functional admin panel that you can play with. On the Plugins page, beneath the description and an activated Redux Framework, you will find a Demo Mode link. Click that link to activate or deactivate the sample-config file Redux ships with.  Don't take our word for it, check out our online demo and try Redux without installing a thing! [**http://demo.reduxframework.com/wp-admin/**](http://demo.reduxframework.com/wp-admin/)
 
 == Changelog ==
+
+= 3.3.1 =
+* Fixed:      #1337 - `redux` JS dependency loading issue.  Many thanks @tpaksu
+* Modified:   Drastically changed the way JavaScript is used in the panel. Forced as-needed
+              initialization of fields. Thus reducing dramatically the overall load time of
+              the panel. The effects have been seen up to 300% speed improvement. The only
+              time a field will be initialized is if it's visible, thus reducing the processing
+              needed in DOM overall.
+* Fixed:      #1336 - fixed default font in preview.
+* Fixed:      #1334 - Typography not un-saving italics.
+* Added:      #1332 - New validation: numeric_not_empty.
+* Fixed:      #1330 - Required not working on all fields.
 
 = 3.3.0 =
 * Fixed:      #1322 - Sections not folding with required argument.

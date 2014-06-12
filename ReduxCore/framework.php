@@ -15,7 +15,7 @@
      * @package     Redux_Framework
      * @subpackage  Core
      * @author      Redux Framework Team
-     * @version     3.3.0.1
+     * @version     3.3.1
      */
 
 // Exit if accessed directly
@@ -64,7 +64,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.0.1';
+            public static $_version = '3.3.1';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -419,7 +419,7 @@
 
                     // Enqueue the admin page CSS and JS
                     if ( isset( $_GET['page'] ) && $_GET['page'] == $this->args['page_slug'] ) {
-                        add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ) );
+                        add_action( 'admin_enqueue_scripts', array( $this, '_enqueue' ), 1 );
                     }
 
                     // Output dynamic CSS
@@ -1594,6 +1594,7 @@
                         'slider',
                         'spacing',
                         'typography',
+                        'color_scheme'
                         
                     ) )
                 ) {
@@ -2936,7 +2937,7 @@
                             if ( isset( $field['validate'] ) ) {
 
                                 // Make sure 'validate field' is set to 'not_empty' or 'email_not_empty'
-                                if ( $field['validate'] == 'not_empty' || $field['validate'] == 'email_not_empty' ) {
+                                if ( $field['validate'] == 'not_empty' || $field['validate'] == 'email_not_empty' || $field['validate'] == 'numeric_not_empty' ) {
 
                                     // Set the flag.
                                     $isNotEmpty = true;
@@ -3861,7 +3862,7 @@
                         do_action( "redux/field/{$this->args['opt_name']}/fieldset/before/{$this->args['opt_name']}", $field, $value );
 
                         if ( ! isset( $field['fields'] ) || empty( $field['fields'] ) ) {
-                            echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="redux-field-container redux-field redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . '>';
+                            echo '<fieldset id="' . $this->args['opt_name'] . '-' . $field['id'] . '" class="redux-field-container redux-field redux-field-init redux-container-' . $field['type'] . ' ' . $class_string . '" data-id="' . $field['id'] . '" ' . $data_string . ' data-type="'.$field['type'].'">';
                         }
 
                         echo $_render;

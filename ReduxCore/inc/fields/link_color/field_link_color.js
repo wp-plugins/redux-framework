@@ -1,21 +1,29 @@
-/*global jQuery, document, redux*/
+/*
+ Field Link Color
+ */
+
+/*global jQuery, document, redux_change, redux*/
 
 (function( $ ) {
-    "use strict";
+    'use strict';
 
     redux.field_objects = redux.field_objects || {};
-    redux.field_objects.date = redux.field_objects.date || {};
+    redux.field_objects.link_color = redux.field_objects.link_color || {};
 
     $( document ).ready(
         function() {
-            //redux.field_objects.date.init();
+            //        setTimeout(function () {
+            //            redux.field_objects.color.init();
+            //        }, 1000);
         }
     );
 
-    redux.field_objects.date.init = function( selector ) {
+    redux.field_objects.link_color.init = function( selector ) {
+
         if ( !selector ) {
-            selector = $( document ).find( '.redux-container-date' );
+            selector = $( document ).find( '.redux-container-link_color' );
         }
+
         $( selector ).each(
             function() {
                 var el = $( this );
@@ -28,14 +36,8 @@
                 } else {
                     return;
                 }
-                el.find( '.redux-datepicker' ).each(
-                    function() {
-                        $( this ).datepicker();
-                    }
-                );
+                redux.field_objects.color.init(el);
             }
         );
-
-
     };
 })( jQuery );

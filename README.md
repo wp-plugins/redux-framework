@@ -78,6 +78,49 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.3 =
+* Modified:   #1412 - Redesigned text label, placeholder fix.
+
+= 3.3.2.10 =
+* Fixed:      #1408 & #1357 - Typography subsets losing value after multiple saves on other panels.
+
+= 3.3.2.9 =
+* Fixed:      #1403 - unit value no longer prints after empty typography values
+* Modified:   Typography: Backup font no longer appends to `font-family` variable.  Please use the `backup-font` variable to specify backup fonts.  This does not apply to output/compiler strings.
+
+= 3.3.2.8 =
+* Fixed:      #1403 - Backup font not appearing in font-family variable.
+
+= 3.3.2.7 =
+* Modified:   Customizer now supports section and field `permissions` argument.
+* Fixed:      #1399 - Customizer respects `page_permissions` argument.
+
+= 3.3.2.6 =
+* Fixed:      #1400 - output/compiler string incomplete using multiple selectors.
+
+= 3.3.2.5 =
+* Fixed:      #1396 - Custom fonts cutting off multiple families in selector, after save.
+* Fixed:      Typography attempting to queue up non google fonts on backend.
+* Added:      #1395 - Display of child theme status in sysinfo, thanks @SiR-DanieL.
+
+= 3.3.2.4 =
+* Fixed:      #1387 - Page jump when clicking "Options Object".  Thanks @rrikesh.
+* Added:      #1392 - Filters to change the following localized strings:
+              redux/{opt_name}/localize/reset
+              redux/{opt_name}/localize/reset_all
+              redux/{opt_name}/localize/save_pending
+              redux/{opt_name}/localize/preset
+
+= 3.3.2.3 =
+* Fixed:      #1376 - checkbox.min.js missing.
+
+= 3.3.2.2 =
+* Fixed:      Static variable changes for instances and basic comment cleanup
+
+= 3.3.2.1 =
+* Fixed:      #1361 - Raw field not hiding with required.
+* Fixed:      Datepicker not formatting properly.  Still needs some work.
+
 = 3.3.1.9 =
 * Fixed:      #1357 - Preview not rendering font on page load.
 

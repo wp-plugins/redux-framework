@@ -3,7 +3,7 @@
     /**
      * Redux Framework is free software: you can redistribute it and/or modify
      * it under the terms of the GNU General Public License as published by
-     * the Free Software Foundation, either version 2 of the License, or
+     * the Free Software Foundation, either version 3 of the License, or
      * any later version.
      * Redux Framework is distributed in the hope that it will be useful,
      * but WITHOUT ANY WARRANTY; without even the implied warranty of
@@ -63,7 +63,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.2';
+            public static $_version = '3.3.3';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -73,7 +73,6 @@
             public static $_properties;
             public static $_is_plugin   = true;
             public static $_as_plugin   = false;
-            public static $_instance    = null;
 
             static function init() {
 
@@ -107,104 +106,78 @@
             }
 
             // ::init()
-
-            public $framework_url = 'http://www.reduxframework.com/';
-            public $instance = null;
-            public $admin_notices = array();
-            public $page = '';
-            public $saved = false;
-            public $fields = array(); // Fields by type used in the panel
-            public $current_tab = ''; // Current section to display, cookies
-            public $extensions = array(); // Extensions by type used in the panel
-            public $sections = array(); // Sections and fields
-            public $errors = array(); // Errors
-            public $warnings = array(); // Warnings
-            public $options = array(); // Option values
-            public $options_defaults = null; // Option defaults
-            public $notices = array(); // Option defaults
-            public $compiler_fields = array(); // Fields that trigger the compiler hook
-            public $required = array(); // Information that needs to be localized
-            public $required_child = array(); // Information that needs to be localized
-            public $localize_data = array(); // Information that needs to be localized
-            public $fonts = array(); // Information that needs to be localized
-            public $folds = array(); // The itms that need to fold.
-            public $path = '';
-            public $changed_values = array(); // Values that have been changed on save. Orig values.
-            public $output = array(); // Fields with CSS output selectors
-            public $outputCSS = null; // CSS that get auto-appended to the header
-            public $compilerCSS = null; // CSS that get sent to the compiler hook
-            public $customizerCSS = null; // CSS that goes to the customizer
-            public $fieldsValues = array(); //all fields values in an id=>value array so we can check dependencies
-            public $fieldsHidden = array(); //all fields that didn't pass the dependency test and are hidden
-            public $toHide = array(); // Values to hide on page load
-            public $typography = null; //values to generate google font CSS
-            public $import_export = null;
-            public $debug = null;
-            private $show_hints = false;
-            private $hidden_perm_fields = array(); //  Hidden fields specified by 'permissions' arg.
-            private $hidden_perm_sections = array(); //  Hidden sections specified by 'permissions' arg.
-            public $typography_preview = array();
-            public $args = array(
-                'opt_name'           => '',
-                // Must be defined by theme/plugin
-                'google_api_key'     => '',
-                // Must be defined to add google fonts to the typography module
-                'last_tab'           => '',
-                // force a specific tab to always show on reload
-                'menu_icon'          => '',
-                // menu icon
-                'menu_title'         => '',
-                // menu title/text
+            
+            public $framework_url           = 'http://www.reduxframework.com/';
+            public static $instance         = null;
+            public $admin_notices           = array();
+            public $page                    = '';
+            public $saved                   = false;
+            public $fields                  = array();  // Fields by type used in the panel
+            public $current_tab             = '';       // Current section to display, cookies
+            public $extensions              = array();  // Extensions by type used in the panel
+            public $sections                = array();  // Sections and fields
+            public $errors                  = array();  // Errors
+            public $warnings                = array();  // Warnings
+            public $options                 = array();  // Option values
+            public $options_defaults        = null;     // Option defaults
+            public $notices                 = array();  // Option defaults
+            public $compiler_fields         = array();  // Fields that trigger the compiler hook
+            public $required                = array();  // Information that needs to be localized
+            public $required_child          = array();  // Information that needs to be localized
+            public $localize_data           = array();  // Information that needs to be localized
+            public $fonts                   = array();  // Information that needs to be localized
+            public $folds                   = array();  // The itms that need to fold.
+            public $path                    = '';
+            public $changed_values          = array();  // Values that have been changed on save. Orig values.
+            public $output                  = array();  // Fields with CSS output selectors
+            public $outputCSS               = null;     // CSS that get auto-appended to the header
+            public $compilerCSS             = null;     // CSS that get sent to the compiler hook
+            public $customizerCSS           = null;     // CSS that goes to the customizer
+            public $fieldsValues            = array();  //all fields values in an id=>value array so we can check dependencies
+            public $fieldsHidden            = array();  //all fields that didn't pass the dependency test and are hidden
+            public $toHide                  = array();  // Values to hide on page load
+            public $typography              = null;     //values to generate google font CSS
+            public $import_export           = null;
+            public $debug                   = null;
+            private $show_hints             = false;
+            private $hidden_perm_fields     = array();  //  Hidden fields specified by 'permissions' arg.
+            private $hidden_perm_sections   = array();  //  Hidden sections specified by 'permissions' arg.
+            public $typography_preview      = array();
+            public $args                    = array(
+                'opt_name'           => '',             // Must be defined by theme/plugin
+                'google_api_key'     => '',             // Must be defined to add google fonts to the typography module
+                'last_tab'           => '',             // force a specific tab to always show on reload
+                'menu_icon'          => '',             // menu icon
+                'menu_title'         => '',             // menu title/text
                 'page_icon'          => 'icon-themes',
-                'page_title'         => '',
-                // option page title
+                'page_title'         => '',             // option page title
                 'page_slug'          => '_options',
                 'page_permissions'   => 'manage_options',
-                'menu_type'          => 'menu',
-                // ('menu'|'submenu')
-                'page_parent'        => 'themes.php',
-                // requires menu_type = 'submenu
+                'menu_type'          => 'menu',         // ('menu'|'submenu')
+                'page_parent'        => 'themes.php',   // requires menu_type = 'submenu
                 'page_priority'      => null,
-                'allow_sub_menu'     => true,
-                // allow submenus to be added if menu_type == menu
-                'save_defaults'      => true,
-                // Save defaults to the DB on it if empty
+                'allow_sub_menu'     => true,           // allow submenus to be added if menu_type == menu
+                'save_defaults'      => true,           // Save defaults to the DB on it if empty
                 'footer_credit'      => '',
                 'async_typography'   => false,
-                'class'              => '',
-                // Class that gets appended to all redux-containers
-                'admin_bar'          => true,
-                // Show the panel pages on the admin bar
+                'class'              => '',             // Class that gets appended to all redux-containers
+                'admin_bar'          => true,           // Show the panel pages on the admin bar
                 'help_tabs'          => array(),
-                'help_sidebar'       => '',
-                // __( '', 'redux-framework' );
-                'database'           => '',
-                // possible: options, theme_mods, theme_mods_expanded, transient, network
-                'customizer'         => false,
-                // setting to true forces get_theme_mod_expanded
-                'global_variable'    => '',
-                // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
-                'output'             => true,
-                // Dynamically generate CSS
-                'compiler'           => true,
-                // Initiate the compiler hook
-                'output_tag'         => true,
-                // Print Output Tag
+                'help_sidebar'       => '',             
+                'database'           => '',             // possible: options, theme_mods, theme_mods_expanded, transient, network
+                'customizer'         => false,          // setting to true forces get_theme_mod_expanded
+                'global_variable'    => '',             // Changes global variable from $GLOBALS['YOUR_OPT_NAME'] to whatever you set here. false disables the global variable
+                'output'             => true,           // Dynamically generate CSS
+                'compiler'           => true,           // Initiate the compiler hook
+                'output_tag'         => true,           // Print Output Tag
                 'transient_time'     => '',
-                'default_show'       => false,
-                // If true, it shows the default value
-                'default_mark'       => '',
-                // What to print by the field's title if the value shown is default
-                'update_notice'      => true,
-                // Recieve an update notice of new commits when in dev mode
-                'disable_save_warn'  => false,
-                // Disable the save warn
-                'open_expanded'      => false,
-                // Start the panel fully expanded to start with
-                'network_admin'      => false,
-                // Enable network admin when using network database mode
-                'network_sites'      => true,
-                // Enable sites as well as admin when using network database mode
+                'default_show'       => false,          // If true, it shows the default value
+                'default_mark'       => '',             // What to print by the field's title if the value shown is default
+                'update_notice'      => true,           // Recieve an update notice of new commits when in dev mode
+                'disable_save_warn'  => false,          // Disable the save warn
+                'open_expanded'      => false,          // Start the panel fully expanded to start with
+                'network_admin'      => false,          // Enable network admin when using network database mode
+                'network_sites'      => true,           // Enable sites as well as admin when using network database mode
                 
                 'hide_reset'         => false,
                 'hints'              => array(
@@ -237,13 +210,7 @@
                 ),
                 'show_import_export' => true,
                 'dev_mode'           => false,
-                /**
-                 * 'system_info'
-                 *
-                 * @deprecated
-                 */
                 'system_info'        => false,
-                // REMOVE
             );
 
 
@@ -511,8 +478,6 @@
             /**
              * Load the plugin text domain for translation.
              *
-             * @param string $opt_name
-             *
              * @since    3.0.5
              */
             public function _internationalization() {
@@ -542,11 +507,6 @@
                 return self::$instance;
             } // get_instance()
 
-            public static function _instance() {
-                self::$_instance = $this;
-                return self::$_instance;
-            }
-            
             public function _tracking() {
                 include_once( dirname( __FILE__ ) . '/inc/tracking.php' );
                 $tracking = Redux_Tracking::get_instance();
@@ -1250,7 +1210,6 @@
                     // as default, we need to validate it, so anything that
                     // isn't post_type=<post_type> doesn't get through and mess
                     // things up.
-
                     $addMenu = false;
                     if ( 'settings.php' != $page_parent ) {
                         // Establish the needle
@@ -1892,14 +1851,48 @@
                         }
                     }
                 }
+
                 $this->localize_data['fieldsHidden'] = $this->fieldsHidden;
                 $this->localize_data['options']      = $this->options;
                 $this->localize_data['defaults']     = $this->options_defaults;
+                
+                /**
+                 * Save pending string
+                 * filter 'redux/{opt_name}/localize/save_pending
+                 *
+                 * @param       string        save_pending string
+                 */                
+                $save_pending   = apply_filters("redux/{$this->args['opt_name']}/localize/save_pending", __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ));
+                
+                /**
+                 * Reset all string
+                 * filter 'redux/{opt_name}/localize/reset
+                 *
+                 * @param       string        reset all string
+                 */                
+                $reset_all      = apply_filters("redux/{$this->args['opt_name']}/localize/reset", __( 'Are you sure? Resetting will lose all custom values.', 'redux-framework' ));
+                
+                /**
+                 * Reset section string
+                 * filter 'redux/{opt_name}/localize/reset_section
+                 *
+                 * @param       string        reset section string
+                 */                
+                $reset_section  = apply_filters("redux/{$this->args['opt_name']}/localize/reset_section", __( 'Are you sure? Resetting will lose all custom values in this section.', 'redux-framework' ));
+                
+                /**
+                 * Preset confirm string
+                 * filter 'redux/{opt_name}/localize/preset
+                 *
+                 * @param       string        preset confirm string
+                 */                
+                $preset_confirm = apply_filters("redux/{$this->args['opt_name']}/localize/preset", __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ));
+                
                 $this->localize_data['args']         = array(
-                    'save_pending'          => __( 'You have changes that are not saved. Would you like to save them now?', 'redux-framework' ),
-                    'reset_confirm'         => __( 'Are you sure? Resetting will lose all custom values.', 'redux-framework' ),
-                    'reset_section_confirm' => __( 'Are you sure? Resetting will lose all custom values in this section.', 'redux-framework' ),
-                    'preset_confirm'        => __( 'Your current options will be replaced with the values of this preset. Would you like to proceed?', 'redux-framework' ),
+                    'save_pending'          => $save_pending,
+                    'reset_confirm'         => $reset_all,
+                    'reset_section_confirm' => $reset_section,
+                    'preset_confirm'        => $preset_confirm,
                     'please_wait'           => __( 'Please Wait', 'redux-framework' ),
                     'opt_name'              => $this->args['opt_name'],
                     'slug'                  => $this->args['page_slug'],
@@ -1907,7 +1900,6 @@
                     'disable_save_warn'     => $this->args['disable_save_warn'],
                     'class'                 => $this->args['class'],
                 );
-
 
                 // Construct the errors array.
                 if ( isset( $this->transients['last_save_mode'] ) && ! empty( $this->transients['notices']['errors'] ) ) {
@@ -2176,7 +2168,7 @@
                 }
 
                 if ( ! empty( $default_output ) ) {
-                    $default_output = '<span class="showDefaults">' . $default_output . '</span><br />';
+                    $default_output = '<span class="showDefaults">' . $default_output . '</span><br class="default_br" />';
                 }
 
                 return $default_output;

@@ -107,7 +107,6 @@
                     echo '<input type="hidden" class="select2_params" value="' . $select2_params . '">';
                 }
 
-
                 if ( $this->field['background-color'] === true ) {
 
                     if ( isset( $this->value['color'] ) && empty( $this->value['background-color'] ) ) {
@@ -351,7 +350,7 @@
             public function enqueue() {
                 wp_enqueue_script(
                     'redux-field-background-js',
-                    ReduxFramework::$_url . 'inc/fields/background/field_background.js',
+                    ReduxFramework::$_url . 'inc/fields/background/field_background' . Redux_Functions::isMin() . '.js',
                     array( 'jquery', 'wp-color-picker', 'select2-js', 'redux-js' ),
                     time(),
                     true

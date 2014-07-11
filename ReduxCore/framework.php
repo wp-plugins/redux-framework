@@ -65,7 +65,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.4.1';
+            public static $_version = '3.3.4.2';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -346,14 +346,27 @@
             } // __construct()
 
             private function set_redux_content() {
-                self::$_upload_dir = Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '/uploads/redux/';
+                $wp_content_dir = Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR ));
+                self::$_upload_dir = $wp_content_dir . '/uploads/redux/';
                 self::$_upload_url = Redux_Helpers::cleanFilePath(trailingslashit( content_url() )) . '/uploads/redux/';
 
                 if ( ! is_dir( self::$_upload_dir ) ) {
                     // Create the directory
 
+                    $dir_writable = substr(sprintf('%o', fileperms($wp_content_dir)), -4) == "0774" ? "true" : "false";
+
                     if ($this->filesystem->execute('mkdir', self::$_upload_dir)) {
                         return;
+                    } else {
+                        function no_writing_permissions_admin_notice() {
+                            ?>
+                            <div class="error">
+                                <p><?php _e( 'Unable to create a required directory. Please ensure that <code>'. Redux_Helpers::cleanFilePath(trailingslashit( WP_CONTENT_DIR )) . '/uploads/</code> has the proper read/write permissions.', 'redux-framework' ); ?></p>
+                            </div>
+                        <?php
+                        }
+                        add_action( 'admin_notices', 'no_writing_permissions_admin_notice' );
+                        $this->filesystem->killswitch = true;
                     }
                 }
             }

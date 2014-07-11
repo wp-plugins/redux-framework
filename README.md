@@ -78,6 +78,31 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.3.8 =
+* Fixed:      Issues with file writing. Basically many users don't install WordPress with all the permissions correct. So... Had to move it back to /uploads/. Sorry Otto, that's just how it is.
+* Fixed:      #1444 - output of typography all_styles when font_style UI was hidden.              
+
+= 3.3.3.7 =
+* Fixed:      #1440 - flaw in new cleanFilePath logic.
+
+= 3.3.3.6 =
+* Fixed:      #1432 - Theme check failing when double-slashes existed in get_template_directory() return.
+* Removed:    curlRead from helper class.
+
+= 3.3.3.5 =
+* Fixed:      #1426 - menu_name not appearing on front end admin bar.
+* Added:      #1427 - button_set added to customizer UI.  Thanks @wpexplorer.
+
+= 3.3.3.4 =
+* Fixed:      #1429 - ACE Editor erroring with no default value set.
+* Fixed:      wp_filesystem now initialized with credentials in an effort to combat the tmp file issue.
+
+= 3.3.3.3 =
+* Modified:   Code purification.
+
+= 3.3.3.2 =
+* Modified:   How section tabs work. Isolated within the redux-container class.
+
 = 3.3.3 =
 * Modified:   #1412 - Redesigned text label, placeholder fix.
 

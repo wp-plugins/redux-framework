@@ -78,6 +78,59 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.6 =
+* Modified:   Language files.
+* Fixed:      #1560 - IE8 RGBA fallack
+
+= 3.3.5.12 =
+* Fixed:      #1543 - Hint icon not changing when set in args.
+
+= 3.3.5.11 =
+* Fixed:      #1537 - Media field not accepting images with mode set to false.
+
+= 3.3.5.10 =
+* Fixed:      #1529 - ACE Editor conflict with Visual Composer.
+* Added:      #1530 - Added argument to specify admin bar icon, `admin_bar_icon`.  Thanks Ninos!
+* Fixed:      #1532 - Media field not accepting any mime type when `'mode' => false`.
+
+= 3.3.5.9 =
+* Fixed:      #1520 - Checkbox field not displaying Wordpress data when using data argument.
+
+= 3.3.5.8 =
+* Fixed:      #1516 - Invalid index and foreach when using compiler and async_typography.
+
+= 3.3.5.7 =
+* Fixed:      #1509 - Sorter adding unnecessary bits on some items.
+* Fixed:      #1514 - Customizer and multisite not getting on properly.
+* Fixed:      #1512 - Slides 'Upload' button not showing or saving selected image.
+
+= 3.3.5.6 =
+* Fixed:      Checkboxes with required were working in reverse.
+
+= 3.3.5.5 =
+* Fixed:      ASync Typography now works! No more flashing fonts.
+
+= 3.3.5.4 =
+* Fixed:      #1489 - Color picker UI lining up improperly.
+* Fixed:      #1497 - dev_mode spinner issue.
+
+= 3.3.5.3 =
+* Fixed:      Spelling error in tracking dialog.
+* Modified:   Updated ace_editor.
+* Modified:   Many MANY fields for the group field.
+* Fixed:      Some CSS bugs.
+
+= 3.3.5.2 =
+* Fixed:      #1481 - Custom fonts loading in google font CSS.
+* Fixed:      #1485 - Customizer 'invalid argument' error.  Thanks @rnlmedia.
+
+= 3.3.5.1 =
+* Fixed:      #1472 - font style not displaying saved valie with no font-family argument set.
+* Fixed:      #1471 - raw field and required not playing nice together.
+
+= 3.3.5 =
+* Added:      An annoying notice at the top so our devs don't ship with dev_mode on.  ;)
+
 = 3.3.4.9 =
 * Fixed:      #1462 - Google fonts not loading in font drop down.
 

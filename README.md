@@ -78,6 +78,34 @@ Send me an email at ghost1227@reduxframework.com so I can add you to our user sp
 
 ### Master ###
 
+= 3.3.6.8 =
+* Fixed:      #1600 - ACE Editor bombing in PHP 5.2 environments.
+
+= 3.3.6.7 =
+* Fixed:      #1591 - Erroneous outputting of font-weight and font-style when no font-family selected.
+* Updated:    #1569 - Improved submenu highlighting.
+* Added:      #1487 - Added `get_default_value` function into the framework.php
+
+= 3.3.6.6 =
+* Fixed:      Framework URI errors when using child themes. Some restructuring.
+
+= 3.3.6.5 =
+* Fixed:      Framework URI errors when embedded in theme with Windows.
+
+= 3.3.6.4 =
+* Added:      image_size as an option for the data argument. Thanks @Gyroscopic!
+
+= 3.3.6.3 =
+* Modified:   How Redux paths are run. Should cover all use cases now. Child themes can also embed 
+              Redux properly now. Thanks @cfoellmann for the suggestions. Fix for issue #1566.
+
+= 3.3.6.2 =
+* Modified:   How we declare the uploads directory and URL. Using core WP functions now.
+
+= 3.3.6.1 =
+* Modified:   Now if a section is empty, but has subsections, that section will be "skipped" when 
+              clicked and the first subsection will then be shown.
+
 = 3.3.6 =
 * Modified:   Language files.
 * Fixed:      #1560 - IE8 RGBA fallack

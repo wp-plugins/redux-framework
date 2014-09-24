@@ -48,7 +48,7 @@
                 if ( ! empty( $redux ) ) {
 
                     $redux = min( $redux );
-                    $dir   = $redux::$_dir . '../';
+                    $dir   = $redux->$_dir . '../';
 
                     if ( isset( $_POST['themename'] ) && ! empty( $_POST['themename'] ) ) {
                         if ( strpos( $dir, $_POST['themename'] ) !== false ) {
@@ -61,7 +61,7 @@
                         }
                     }
 
-                    if ( ! $redux::$_is_plugin ) {
+                    if ( ! $redux->$_is_plugin ) {
                         $errors = array();
 
                         if ( file_exists( $dir . '.tx' ) ) {

@@ -68,7 +68,7 @@
             // ATTENTION DEVS
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
-            public static $_version = '3.3.8.4';
+            public static $_version = '3.3.9';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -124,6 +124,11 @@
                         self::$_url     = trailingslashit( self::$wp_content_url . $relative_url );
                     }
                 }
+                
+                self::$_url = apply_filters( "redux/_url", self::$_url );
+                self::$_dir = apply_filters( "redux/_dir", self::$_dir );
+                self::$_is_plugin = apply_filters( "redux/_is_plugin", self::$_is_plugin );
+                
             }
 
             // ::init()
@@ -1294,7 +1299,11 @@
             public function _options_page() {
                 $this->import_export->in_field();
 
-                if ( $this->args['menu_type'] == 'submenu' ) {
+                if ( $this->args['menu_type'] == 'hidden' ) {
+
+                    // No menu to add!
+
+                } else if ( $this->args['menu_type'] == 'submenu' ) {
                     $this->add_submenu(
                         $this->args['page_parent'],
                         $this->args['page_title'],
@@ -1384,7 +1393,7 @@
                 $ct         = wp_get_theme();
                 $theme_data = $ct;
 
-                if ( ! is_super_admin() || ! is_admin_bar_showing() || ! $this->args['admin_bar'] ) {
+                if ( ! is_super_admin() || ! is_admin_bar_showing() || ! $this->args['admin_bar'] || $this->args['menu_type'] == 'hidden' ) {
                     return;
                 }
 
@@ -2684,6 +2693,14 @@
                      * @param string CSS that get sent to the compiler hook
                      */
                     do_action( "redux/options/{$this->args['opt_name']}/compiler", $this->options, $this->compilerCSS, $this->transients['changed_values'] );
+                    
+                    /**
+                     * action 'redux/options/{opt_name}/compiler/advanced'
+                     *
+                     * @param array  options
+                     * @param string CSS that get sent to the compiler hook, which sends the full Redux object
+                     */
+                    do_action( "redux/options/{$this->args['opt_name']}/compiler/advanced", $this );
 
                     unset( $this->transients['run_compiler'] );
                     $this->set_transients();

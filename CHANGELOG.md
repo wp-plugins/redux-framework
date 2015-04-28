@@ -1,5 +1,15 @@
     # Redux Framework Changelog
 
+## 3.5.4.3
+* Fixed:    #2258 - welcome redirect error with embedding plugin scenarios.
+* Fixed:    Redux plugin load order when activating plugins.
+
+## 3.5.4.2
+* Fixed:    #2271 - stuck redirect on godaddy (seriously, get a real host, people) servers.
+
+## 3.5.4.1
+* Fixed:    #2216 - Reset section not always working within FF.
+    
 ## 3.5.4
 * Modified: update_notice arg only truly shows up if dev_mode is on.
 

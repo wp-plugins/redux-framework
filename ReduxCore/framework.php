@@ -77,7 +77,7 @@
             // Please update the build number with each push, no matter how small.
             // This will make for easier support when we ask users what version they are using.
 
-            public static $_version = '3.5.6';
+            public static $_version = '3.5.6.1';
             public static $_dir;
             public static $_url;
             public static $_upload_dir;
@@ -3084,7 +3084,7 @@
                 }
 
                 $string = "";
-                if ( ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $section['icon_type'] ) && $section['icon_type'] == 'image' ) ) || ( strpos( $section['icon'], '/' ) !== false ) ) {
+                if ( ( ( isset ( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) || ( isset ( $section['icon_type'] ) && $section['icon_type'] == 'image' ) ) || ( isset($section['icon'])  && strpos( $section['icon'], '/' ) !== false ) ) {
                     //if( !empty( $this->args['icon_type'] ) && $this->args['icon_type'] == 'image' ) {
                     $icon = ( ! isset ( $section['icon'] ) ) ? '' : '<img class="image_icon_type" src="' . $section['icon'] . '" /> ';
                 } else {
